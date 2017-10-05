@@ -19,7 +19,7 @@ def get_size(d, key):
     return int(m.group(1)), m.group(2) or "px"
 
 def css(d):
-    return "; ".join(sorted("%s: %s" % kv for kv in d.iteritems()))
+    return "; ".join(sorted("%s: %s" % kv for kv in d.items()))
 
 class youtube(nodes.General, nodes.Element): pass
 
@@ -48,7 +48,7 @@ def visit_youtube_node(self, node):
             "border": "0",
         }
         attrs = {
-            "src": "http://www.youtube.com/embed/%s" % node["id"],
+            "src": "https://www.youtube.com/embed/%s" % node["id"],
             "style": css(style),
         }
         self.body.append(self.starttag(node, "iframe", **attrs))
@@ -67,7 +67,7 @@ def visit_youtube_node(self, node):
             "border": "0",
         }
         attrs = {
-            "src": "http://www.youtube.com/embed/%s" % node["id"],
+            "src": "https://www.youtube.com/embed/%s" % node["id"],
             "style": css(style),
         }
         self.body.append(self.starttag(node, "iframe", **attrs))
