@@ -75,6 +75,10 @@ def visit_youtube_node(self, node):
 def depart_youtube_node(self, node):
     pass
 
+def visit_youtube_node_latex(self,node):
+    self.body.append(r'\begin{quote}\begin{center}\fbox{\url{https://www.youtu.be/%s}}\end{center}\end{quote}'%node['id'])
+
+
 class YouTube(Directive):
     has_content = True
     required_arguments = 1
@@ -107,7 +111,7 @@ def unsupported_visit_youtube(self, node):
 
 _NODE_VISITORS = {
     'html': (visit_youtube_node, depart_youtube_node),
-    'latex': (unsupported_visit_youtube, None),
+    'latex': (visit_youtube_node_latex, depart_youtube_node),
     'man': (unsupported_visit_youtube, None),
     'texinfo': (unsupported_visit_youtube, None),
     'text': (unsupported_visit_youtube, None)
