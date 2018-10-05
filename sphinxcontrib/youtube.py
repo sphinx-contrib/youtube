@@ -103,9 +103,21 @@ class YouTube(Directive):
         height = get_size(self.options, "height")
         return [youtube(id=self.arguments[0], aspect=aspect, width=width, height=height)]
 
+
+def unsupported_visit_youtube(self, node):
+    self.builder.warn('youtube: unsupported output format (node skipped)')
+    raise nodes.SkipNode
+
+
+_NODE_VISITORS = {
+    'html': (visit_youtube_node, depart_youtube_node),
+    'latex': (visit_youtube_node_latex, depart_youtube_node),
+    'man': (unsupported_visit_youtube, None),
+    'texinfo': (unsupported_visit_youtube, None),
+    'text': (unsupported_visit_youtube, None)
+}
+
+
 def setup(app):
-    app.add_node(youtube,
-        html=(visit_youtube_node, depart_youtube_node),
-        latex=(visit_youtube_node_latex, depart_youtube_node)
-    )
+    app.add_node(youtube, **_NODE_VISITORS)
     app.add_directive("youtube", YouTube)
