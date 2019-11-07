@@ -30,14 +30,14 @@ def visit_youtube_node(self, node):
     if aspect is None:
         aspect = 16, 9
 
+    div_style = {}
     if (height is None) and (width is not None) and (width[1] == "%"):
-        style = {
+        div_style = {
             "padding-top": "%dpx" % CONTROL_HEIGHT,
             "padding-bottom": "%f%%" % (width[0] * aspect[1] / aspect[0]),
             "width": "%d%s" % width,
             "position": "relative",
         }
-        self.body.append(self.starttag(node, "div", style=css(style)))
         style = {
             "position": "absolute",
             "top": "0",
@@ -50,8 +50,6 @@ def visit_youtube_node(self, node):
             "src": "https://www.youtube.com/embed/%s" % node["id"],
             "style": css(style),
         }
-        self.body.append(self.starttag(node, "iframe", **attrs))
-        self.body.append("</iframe></div>")
     else:
         if width is None:
             if height is None:
@@ -69,8 +67,14 @@ def visit_youtube_node(self, node):
             "src": "https://www.youtube.com/embed/%s" % node["id"],
             "style": css(style),
         }
-        self.body.append(self.starttag(node, "iframe", **attrs))
-        self.body.append("</iframe>")
+    attrs["allowfullscreen"] = "true"
+    div_attrs = {
+        "CLASS": "youtube_wrapper",
+        "style": css(div_style),
+    }
+    self.body.append(self.starttag(node, "div", **div_attrs))
+    self.body.append(self.starttag(node, "iframe", **attrs))
+    self.body.append("</iframe></div>")
 
 def depart_youtube_node(self, node):
     pass
@@ -121,3 +125,4 @@ _NODE_VISITORS = {
 def setup(app):
     app.add_node(youtube, **_NODE_VISITORS)
     app.add_directive("youtube", YouTube)
+
