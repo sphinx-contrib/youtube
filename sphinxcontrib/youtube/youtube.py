@@ -1,24 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 import re
 from docutils import nodes
 from docutils.parsers.rst import directives, Directive
+from .utils import get_size, css
 
 CONTROL_HEIGHT = 30
-
-def get_size(d, key):
-    if key not in d:
-        return None
-    m = re.match("(\d+)(|%|px)$", d[key])
-    if not m:
-        raise ValueError("invalid size %r" % d[key])
-    return int(m.group(1)), m.group(2) or "px"
-
-def css(d):
-    return "; ".join(sorted("%s: %s" % kv for kv in d.items()))
 
 class youtube(nodes.General, nodes.Element): pass
 
@@ -120,9 +108,4 @@ _NODE_VISITORS = {
     'texinfo': (unsupported_visit_youtube, None),
     'text': (unsupported_visit_youtube, None)
 }
-
-
-def setup(app):
-    app.add_node(youtube, **_NODE_VISITORS)
-    app.add_directive("youtube", YouTube)
 
