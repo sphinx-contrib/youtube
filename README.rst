@@ -23,4 +23,6 @@ parameters "aspect", "width", and "height" may optionally be provided::
     ..  youtube:: oHg5SJYRHA0
         :height: 200px
 
+A simple link to the video, enclosed in a box, will be inserted in LaTeX output.
+
 ..  -*- mode: rst; fill-column: 72 -*-
