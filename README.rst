@@ -1,10 +1,18 @@
 sphinxcontrib.youtube
 =====================
 
-This module defines a directive, `youtube`.  It takes a single, required
-argument, a YouTube video ID::
+This module provides support for including YouTube and Vimeo videos
+in Sphinx rst documents.
+
+This module defines directives, `youtube` and `vimeo` which insert videos
+from the respective platforms. They take a single, required argument, a 
+YouTube video ID::
 
     ..  youtube:: oHg5SJYRHA0
+
+or a Vimeo video ID::
+
+    .. vimeo:: 486106801
 
 The referenced video will be embedded into HTML output.  By default, the
 embedded video will be sized for 720p content.  To control this, the
