@@ -17,6 +17,7 @@ visit_youtube_node = partial(utils.visit_video_node,
 
 
 visit_youtube_node_latex = partial(utils.visit_video_node_latex,
+                                   platform="youtube",
                                    platform_url="https://youtu.be/")
 
 

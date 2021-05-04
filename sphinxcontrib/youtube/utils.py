@@ -84,8 +84,13 @@ def depart_video_node(self, node):
     pass
 
 
-def visit_video_node_latex(self, node, platform_url):
-    self.body.append(r'\begin{quote}\begin{center}\fbox{\url{%s%s}}\end{center}\end{quote}' % (platform_url, node['id']))
+def visit_video_node_latex(self, node, platform, platform_url):
+    macro = r"\sphinxcontrib%s" % platform
+    if macro not in self.elements["preamble"]:
+        self.elements["preamble"] += r"""
+        \newcommand{%s}[2]{\begin{quote}\begin{center}\fbox{\url{#1#2}}\end{center}\end{quote}}
+        """ % macro
+    self.body.append('%s{%s}{%s}\n' % (macro, platform_url, node['id']))
 
 
 class Video(Directive):

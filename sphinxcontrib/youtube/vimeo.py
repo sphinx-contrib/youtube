@@ -17,11 +17,12 @@ visit_vimeo_node = partial(utils.visit_video_node,
 
 
 visit_vimeo_node_latex = partial(utils.visit_video_node_latex,
+                                 platform="vimeo",
                                  platform_url="https://player.vimeo.com/video/")
 
 
 unsupported_visit_vimeo = partial(utils.unsupported_visit_video,
-                                  platform="video")
+                                  platform="vimeo")
 
 
 _NODE_VISITORS = {

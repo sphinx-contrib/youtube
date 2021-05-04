@@ -31,6 +31,16 @@ parameters "aspect", "width", and "height" may optionally be provided::
     ..  youtube:: oHg5SJYRHA0
         :height: 200px
 
-A simple link to the video, enclosed in a box, will be inserted in LaTeX output.
+In LaTeX output, the followinging code will be emitted for YouTube::
 
-..  -*- mode: rst; fill-column: 72 -*-
+    \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}
+
+The user may customise the rendering of the URL by defining this command in 
+the premble. If they do not, then the default definition is used::
+
+    \newcommand{\sphinxcontribvimeo}[2]{\begin{quote}\begin{center}\fbox{\url{#1#2}}\end{center}\end{quote}}
+
+This prints a simple link to the video, enclosed in a box. LaTeX support for
+Vimeo is similar, except that the macro is named `\sphinxcontribvimeo`.
+
+..  -*- mode: rst; fill-column: 79 -*-
