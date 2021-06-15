@@ -26,11 +26,12 @@ def visit_youtube_node(self, node):
     aspect = node["aspect"]
     width = node["width"]
     height = node["height"]
+    hide = node["hide"]
 
     if aspect is None:
         aspect = 16, 9
-
-    div_style = {}
+    
+    div_style = {"display": "none"} if hide else {"display": "block"}
     if (height is None) and (width is not None) and (width[1] == "%"):
         div_style = {
             "padding-top": "%dpx" % CONTROL_HEIGHT,
@@ -71,10 +72,13 @@ def visit_youtube_node(self, node):
     div_attrs = {
         "CLASS": "youtube_wrapper",
         "style": css(div_style),
+        "name": node['id'] # Using the id as a unique identifier for this class
     }
     self.body.append(self.starttag(node, "div", **div_attrs))
     self.body.append(self.starttag(node, "iframe", **attrs))
     self.body.append("</iframe></div>")
+    if hide:
+        self.body.append("<button onclick=\"document.getElementsByName('"+node['id']+"')[0].style.display = 'block'; this.style.display = 'none'\">"+hide+"</button></section>")
 
 def depart_youtube_node(self, node):
     pass
@@ -92,6 +96,7 @@ class YouTube(Directive):
         "width": directives.unchanged,
         "height": directives.unchanged,
         "aspect": directives.unchanged,
+        "hide": directives.unchanged,
     }
 
     def run(self):
@@ -105,7 +110,16 @@ class YouTube(Directive):
             aspect = None
         width = get_size(self.options, "width")
         height = get_size(self.options, "height")
-        return [youtube(id=self.arguments[0], aspect=aspect, width=width, height=height)]
+        hide = False # set default
+        if "hide" in self.options:
+            hide = self.options.get("hide")
+            if hide.lower().strip() == "false":
+                hide = False
+            elif hide.lower().strip() == "true":
+                hide = "Display embeded video"
+            else:
+                hide = "Display: "+hide.strip()
+        return [youtube(id=self.arguments[0], aspect=aspect, width=width, height=height, hide=hide)]
 
 
 def unsupported_visit_youtube(self, node):
