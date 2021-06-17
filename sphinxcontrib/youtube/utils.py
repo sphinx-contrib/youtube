@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import re
-from typing_extensions import TypeVarTuple
 from docutils import nodes
 from docutils.parsers.rst import directives, Directive
 
