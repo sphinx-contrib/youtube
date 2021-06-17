@@ -94,7 +94,7 @@ def visit_video_node(self, node, platform_url):
     self.body.append(self.starttag(node, "iframe", **attrs))
     self.body.append("</iframe></div>")
     if hide:
-        self.body.append(f'<button onclick=\"document.getElementsByName(\"{node["id"]}\")[0].style.display = \"block\"; this.style.display = \"none\">{hide}</button></section>')
+        self.body.append(f'\n<button onclick=\'document.getElementsByName(\"{node["id"]}\")[0].style.display = \"block\"; this.style.display = \"none\"\'>{hide}</button></section>')
 
 
 def depart_video_node(self, node):
