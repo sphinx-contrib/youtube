@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+from typing_extensions import TypeVarTuple
 from docutils import nodes
 from docutils.parsers.rst import directives, Directive
 
@@ -17,6 +18,19 @@ def get_size(d, key):
     return int(m.group(1)), m.group(2) or "px"
 
 
+def get_hide(d, key):
+    if key not in d:
+        return False
+    hide = d[key]
+    if hide.lower().strip() == "false":
+        hide = False
+    elif hide.lower().strip() == "true":
+        hide = "Display embeded video"
+    else:
+        hide = "Display: "+hide.strip()
+    return hide
+
+
 def css(d):
     return "; ".join(sorted("%s: %s" % kv for kv in d.items()))
 
@@ -29,11 +43,12 @@ def visit_video_node(self, node, platform_url):
     aspect = node["aspect"]
     width = node["width"]
     height = node["height"]
+    hide = node["hide"]
 
     if aspect is None:
         aspect = 16, 9
-
-    div_style = {}
+    
+    div_style = {"display": "none"} if hide else {"display": "block"}
     if (height is None) and (width is not None) and (width[1] == "%"):
         div_style = {
             "padding-top": "%dpx" % CONTROL_HEIGHT,
@@ -74,10 +89,13 @@ def visit_video_node(self, node, platform_url):
     div_attrs = {
         "CLASS": "video_wrapper",
         "style": css(div_style),
+        "name": node['id'] # Using the id as a unique identifier for this class
     }
     self.body.append(self.starttag(node, "div", **div_attrs))
     self.body.append(self.starttag(node, "iframe", **attrs))
     self.body.append("</iframe></div>")
+    if hide:
+        self.body.append(f'<button onclick=\"document.getElementsByName(\"{node["id"]}\")[0].style.display = \"block\"; this.style.display = \"none\">{hide}</button></section>')
 
 
 def depart_video_node(self, node):
@@ -103,6 +121,7 @@ class Video(Directive):
         "width": directives.unchanged,
         "height": directives.unchanged,
         "aspect": directives.unchanged,
+        "hide": directives.unchanged,
     }
 
     def run(self):
@@ -116,7 +135,8 @@ class Video(Directive):
             aspect = None
         width = get_size(self.options, "width")
         height = get_size(self.options, "height")
-        return [self._node(id=self.arguments[0], aspect=aspect, width=width, height=height)]
+        hide = get_hide(self.options, "hide")
+        return [self._node(id=self.arguments[0], aspect=aspect, width=width, height=height, hide=hide)]
 
 
 def unsupported_visit_video(self, node, platform):
