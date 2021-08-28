@@ -38,7 +38,7 @@ def visit_video_node(self, node, platform_url):
         if "vimeo" in platform_url:
             timestamp_url = f"#t={timestamp}"
         else:
-            timestamp_url = f"?t={timestamp}"
+            timestamp_url = f"?start={timestamp}"
     else:
         timestamp_url = ""
 
