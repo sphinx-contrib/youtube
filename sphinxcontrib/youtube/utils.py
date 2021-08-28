@@ -29,9 +29,18 @@ def visit_video_node(self, node, platform_url):
     aspect = node["aspect"]
     width = node["width"]
     height = node["height"]
+    timestamp = node["timestamp"]
 
     if aspect is None:
         aspect = 16, 9
+
+    if timestamp is not None:
+        if "vimeo" in platform_url:
+            timestamp_url = f"#t={timestamp}"
+        else:
+            timestamp_url = f"?t={timestamp}"
+    else:
+        timestamp_url = ""
 
     div_style = {}
     if (height is None) and (width is not None) and (width[1] == "%"):
@@ -50,7 +59,7 @@ def visit_video_node(self, node, platform_url):
             "border": "0",
         }
         attrs = {
-            "src": f"{platform_url}{node['id']}",
+            "src": f"{platform_url}{node['id']}{timestamp_url}",
             "style": css(style),
         }
     else:
@@ -103,6 +112,7 @@ class Video(Directive):
         "width": directives.unchanged,
         "height": directives.unchanged,
         "aspect": directives.unchanged,
+        "timestamp": directives.unchanged,
     }
 
     def run(self):
@@ -116,7 +126,8 @@ class Video(Directive):
             aspect = None
         width = get_size(self.options, "width")
         height = get_size(self.options, "height")
-        return [self._node(id=self.arguments[0], aspect=aspect, width=width, height=height)]
+        timestamp = self.options.get("timestamp", None)
+        return [self._node(id=self.arguments[0], aspect=aspect, width=width, height=height, timestamp=timestamp)]
 
 
 def unsupported_visit_video(self, node, platform):

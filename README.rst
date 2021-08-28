@@ -31,6 +31,15 @@ parameters "aspect", "width", and "height" may optionally be provided::
     ..  youtube:: oHg5SJYRHA0
         :height: 200px
 
+To start the video at a specific timestamp the parameter "timestamp" may
+optionally be provided::
+
+    ..  youtube:: oHg5SJYRHA0
+        :timestamp: 300
+
+    .. vimeo:: 73214621
+        :timestamp: 3m13s
+
 In LaTeX output, the followinging code will be emitted for YouTube::
 
     \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}
