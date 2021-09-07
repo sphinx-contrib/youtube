@@ -12,17 +12,16 @@ class YouTube(utils.Video):
     _node = youtube
 
 
-visit_youtube_node = partial(utils.visit_video_node,
-                             platform_url="https://www.youtube.com/embed/")
+def visit_youtube_node(self, node):
+    return utils.visit_video_node(self, node, platform_url="https://www.youtube.com/embed/")
 
 
-visit_youtube_node_latex = partial(utils.visit_video_node_latex,
-                                   platform="youtube",
-                                   platform_url="https://youtu.be/")
+def visit_youtube_node_latex(self, node):
+    return utils.visit_video_node_latex(self, node, platform="youtube", platform_url="https://youtu.be/")
 
 
-unsupported_visit_youtube = partial(utils.unsupported_visit_video,
-                                    platform="youtube")
+def unsupported_visit_youtube(self, node):
+    return utils.unsupported_visit_video(self, node, platform="youtube")
 
 
 _NODE_VISITORS = {
