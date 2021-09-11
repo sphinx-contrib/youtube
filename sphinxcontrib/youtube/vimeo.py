@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from . import utils
-from functools import partial
 
 
 class vimeo(utils.video):
