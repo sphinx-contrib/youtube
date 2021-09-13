@@ -5,15 +5,15 @@ from setuptools import setup, find_packages
 long_desc = '''
 This package contains the youtube Sphinx extension.
 
-The extension defines the directives, "youtube" and "vimeo", for embedding 
-YouTube and Vimeo videos, respectively. 
+The extension defines the directives, "youtube" and "vimeo", for embedding
+YouTube and Vimeo videos, respectively.
 '''
 
 requires = ['Sphinx>=0.6']
 
 setup(
     name='sphinxcontrib-youtube',
-    version='1.0.0',
+    version='1.0.1',
     url='https://github.com/sphinx-contrib/youtube',
     license='BSD',
     author='Chris Pickel',
