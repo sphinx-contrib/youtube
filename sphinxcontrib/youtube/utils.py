@@ -50,7 +50,7 @@ def visit_video_node(self, node, platform_url):
             "border": "0",
         }
         attrs = {
-            "src": f"{platform_url}{node['id']}",
+            "src": "{}{}".format(platform_url,node['id']),
             "style": css(style),
         }
     else:
@@ -67,7 +67,7 @@ def visit_video_node(self, node, platform_url):
             "border": "0",
         }
         attrs = {
-            "src":  f"{platform_url}{node['id']}",
+            "src":  "{}{}".format(platform_url,node['id']),
             "style": css(style),
         }
     attrs["allowfullscreen"] = "true"
@@ -120,5 +120,5 @@ class Video(Directive):
 
 
 def unsupported_visit_video(self, node, platform):
-    self.builder.warn(f'{platform}: unsupported output format (node skipped)')
+    self.builder.warn('{}: unsupported output format (node skipped)'.format(platform))
     raise nodes.SkipNode

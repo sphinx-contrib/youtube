@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from . import utils
-from functools import partial
 
 
 class vimeo(utils.video):
@@ -12,17 +11,16 @@ class Vimeo(utils.Video):
     _node = vimeo
 
 
-visit_vimeo_node = partial(utils.visit_video_node,
-                           platform_url="https://player.vimeo.com/video/")
+def visit_vimeo_node(self, node):
+    return utils.visit_video_node(self, node, platform_url="https://player.vimeo.com/video/")
 
 
-visit_vimeo_node_latex = partial(utils.visit_video_node_latex,
-                                 platform="vimeo",
-                                 platform_url="https://player.vimeo.com/video/")
+def visit_vimeo_node_latex(self, node):
+    return utils.visit_video_node_latex(self, node, platform="vimeo", platform_url="https://player.vimeo.com/video/")
 
 
-unsupported_visit_vimeo = partial(utils.unsupported_visit_video,
-                                  platform="vimeo")
+def unsupported_visit_vimeo(self, node):
+    return utils.unsupported_visit_video(self, node, platform="vimeo")
 
 
 _NODE_VISITORS = {
