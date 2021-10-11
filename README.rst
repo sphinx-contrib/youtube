@@ -31,6 +31,13 @@ parameters "aspect", "width", and "height" may optionally be provided::
     ..  youtube:: oHg5SJYRHA0
         :height: 200px
 
+To set the alignment of the embedded video's iframe in the HTML output, an 
+optional "align" parameter can be specified, similar to the rst :image: 
+directive::
+
+    ..  youtube:: oHg5SJYRHA0
+        :align: center
+
 In LaTeX output, the followinging code will be emitted for YouTube::
 
     \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}

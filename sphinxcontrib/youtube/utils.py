@@ -75,6 +75,7 @@ def visit_video_node(self, node, platform_url):
         "CLASS": "video_wrapper",
         "style": css(div_style),
     }
+    if node["align"] != None: div_attrs["CLASS"] += " align-%s" % node["align"]
     self.body.append(self.starttag(node, "div", **div_attrs))
     self.body.append(self.starttag(node, "iframe", **attrs))
     self.body.append("</iframe></div>")
@@ -103,6 +104,7 @@ class Video(Directive):
         "width": directives.unchanged,
         "height": directives.unchanged,
         "aspect": directives.unchanged,
+        "align": directives.unchanged,
     }
 
     def run(self):
@@ -114,9 +116,16 @@ class Video(Directive):
             aspect = tuple(int(x) for x in m.groups())
         else:
             aspect = None
+        if "align" in self.options:
+            align = self.options.get("align")
+            if align not in ["left", "center", "right"]:
+                raise ValueError(
+                    "invalid alignment. choices are [\"left\", \"center\", \"right\"]")
+        else:
+            align = None
         width = get_size(self.options, "width")
         height = get_size(self.options, "height")
-        return [self._node(id=self.arguments[0], aspect=aspect, width=width, height=height)]
+        return [self._node(id=self.arguments[0], aspect=aspect, width=width, height=height, align=align)]
 
 
 def unsupported_visit_video(self, node, platform):
