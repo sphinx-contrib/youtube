@@ -70,6 +70,7 @@ def visit_video_node(self, node, platform_url):
             "src":  "{}{}".format(platform_url,node['id']),
             "style": css(style),
         }
+    if node["align"] != None: div_style["text-align"] = node["align"]
     attrs["allowfullscreen"] = "true"
     div_attrs = {
         "CLASS": "video_wrapper",
