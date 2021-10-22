@@ -29,18 +29,10 @@ def visit_video_node(self, node, platform_url):
     aspect = node["aspect"]
     width = node["width"]
     height = node["height"]
-    timestamp = node["timestamp"]
+    url_parameters = node["url_parameters"]
 
     if aspect is None:
         aspect = 16, 9
-
-    if timestamp is not None:
-        if "vimeo" in platform_url:
-            timestamp_url = "#t={}".format(timestamp)
-        else:
-            timestamp_url = "?start={}".format(timestamp)
-    else:
-        timestamp_url = ""
 
     div_style = {}
     if (height is None) and (width is not None) and (width[1] == "%"):
@@ -59,7 +51,7 @@ def visit_video_node(self, node, platform_url):
             "border": "0",
         }
         attrs = {
-            "src": "{}{}{}".format(platform_url,node['id'],timestamp_url),
+            "src": "{}{}{}".format(platform_url,node['id'],url_parameters),
             "style": css(style),
         }
     else:
@@ -97,9 +89,9 @@ def visit_video_node_latex(self, node, platform, platform_url):
     macro = r"\sphinxcontrib%s" % platform
     if macro not in self.elements["preamble"]:
         self.elements["preamble"] += r"""
-        \newcommand{%s}[2]{\begin{quote}\begin{center}\fbox{\url{#1#2}}\end{center}\end{quote}}
+        \newcommand{%s}[2]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}
         """ % macro
-    self.body.append('%s{%s}{%s}\n' % (macro, platform_url, node['id']))
+    self.body.append('%s{%s}{%s}{%s}\n' % (macro, platform_url, node['id'], node['url_parameters']))
 
 
 class Video(Directive):
@@ -112,13 +104,13 @@ class Video(Directive):
         "width": directives.unchanged,
         "height": directives.unchanged,
         "aspect": directives.unchanged,
-        "timestamp": directives.unchanged,
+        "url_parameters": directives.unchanged,
     }
 
     def run(self):
         if "aspect" in self.options:
             aspect = self.options.get("aspect")
-            m = re.match("(\d+):(\d+)", aspect)
+            m = re.match(r"(\d+):(\d+)", aspect)
             if m is None:
                 raise ValueError("invalid aspect ratio %r" % aspect)
             aspect = tuple(int(x) for x in m.groups())
@@ -126,8 +118,8 @@ class Video(Directive):
             aspect = None
         width = get_size(self.options, "width")
         height = get_size(self.options, "height")
-        timestamp = self.options.get("timestamp", None)
-        return [self._node(id=self.arguments[0], aspect=aspect, width=width, height=height, timestamp=timestamp)]
+        url_parameters = self.options.get("url_parameters", "")
+        return [self._node(id=self.arguments[0], aspect=aspect, width=width, height=height, url_parameters=url_parameters)]
 
 
 def unsupported_visit_video(self, node, platform):

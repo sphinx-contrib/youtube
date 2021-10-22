@@ -31,23 +31,23 @@ parameters "aspect", "width", and "height" may optionally be provided::
     ..  youtube:: oHg5SJYRHA0
         :height: 200px
 
-To start the video at a specific timestamp the parameter "timestamp" may
-optionally be provided::
+To start the video at a specific time the parameter "url_parameters" may be used
+(quotes required for Vimeo videos)::
 
     ..  youtube:: oHg5SJYRHA0
-        :timestamp: 300
+        :url_parameters: ?start=300
 
     .. vimeo:: 73214621
-        :timestamp: 3m13s
+        :url_parameters: "#t=3m13s"
 
-In LaTeX output, the followinging code will be emitted for YouTube::
+In LaTeX output, the following code will be emitted for YouTube::
 
-    \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}
+    \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}{?start=300}
 
 The user may customise the rendering of the URL by defining this command in 
 the premble. If they do not, then the default definition is used::
 
-    \newcommand{\sphinxcontribvimeo}[2]{\begin{quote}\begin{center}\fbox{\url{#1#2}}\end{center}\end{quote}}
+    \newcommand{\sphinxcontribvimeo}[2]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}
 
 This prints a simple link to the video, enclosed in a box. LaTeX support for
 Vimeo is similar, except that the macro is named `\sphinxcontribvimeo`.
