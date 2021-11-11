@@ -47,7 +47,7 @@ In LaTeX output, the following code will be emitted for YouTube::
 The user may customise the rendering of the URL by defining this command in 
 the premble. If they do not, then the default definition is used::
 
-    \newcommand{\sphinxcontribvimeo}[2]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}
+    \newcommand{\sphinxcontribvimeo}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}
 
 This prints a simple link to the video, enclosed in a box. LaTeX support for
 Vimeo is similar, except that the macro is named `\sphinxcontribvimeo`.
