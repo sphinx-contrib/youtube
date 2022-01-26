@@ -1,6 +1,14 @@
 sphinxcontrib.youtube
 =====================
 
+.. image:: https://img.shields.io/badge/License-BSD_3--Clause-orange.svg
+    :alt: license
+    :target: LICENCE
+    
+.. image:: https://badge.fury.io/py/sphinxcontrib-youtube.svg
+    :target: https://badge.fury.io/py/sphinxcontrib-youtube
+    :alt: PyPi version 
+
 This module provides support for including YouTube and Vimeo videos
 in Sphinx rst documents.
 
