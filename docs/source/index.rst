@@ -87,7 +87,7 @@ In LaTeX output, the following code will be emitted for the videos:
 
    \sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{"#t=0m43s"}
 
-The user may customise the rendering of the URL by defining this command in the preamble. The captions will be downloaded to the latex folder and can thus be used as images in the :code:`.pdf` document. Here is an example of custom command for both the vimeo and the yoututbe output. This need to be added in the :code:`conf.py` file:
+The user may customise the rendering of the URL by defining this command in the preamble. The captions will be downloaded to the latex folder and can thus be used as images in the :code:`.pdf` document. We are using the `https://vumbnail.com`__ (vimeo) and `https://www.get-youtube-thumbnail.com`__ (youtube) web services to retrieve them. Here is an example of custom command for both the vimeo and the yoututbe output. This need to be added in the :code:`conf.py` file:
 
 .. code-block:: python
 
@@ -103,9 +103,9 @@ The user may customise the rendering of the URL by defining this command in the 
 
 This example will show the video as a figure using the thumbnail as image and the url as caption (clickable link). This is the one we use for this very documentation. rember that the argument of your command are the following:
 
--   #1: the platform url
--   #2: the video ID (it's also the name of the image: :code:`#2.jpg`
--   #3: the options of the url
+-   :code:`#1`: the platform url
+-   :code:`#2`: the video ID (it's also the name of the image: :code:`#2.jpg`
+-   :code:`#3`: the options of the url
 
 If no custom command is set in :code:`conf.py`, then the default definition is used:
 
