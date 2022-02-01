@@ -103,9 +103,9 @@ The user may customise the rendering of the URL by defining this command in the 
 
 This example will show the video as a figure using the thumbnail as image and the url as caption (clickable link). This is the one we use for this very documentation. rember that the argument of your command are the following:
 
--   #1: the platform url
--   #2: the video ID (it's also the name of the image: :code:`#2.jpg`
--   #3: the options of the url
+-   :code:`#1`: the platform url
+-   :code:`#2`: the video ID (it's also the name of the image: :code:`#2.jpg`
+-   :code:`#3`: the options of the url
 
 If no custom command is set in :code:`conf.py`, then the default definition is used:
 
