@@ -9,6 +9,7 @@ class youtube(utils.video):
 
 class YouTube(utils.Video):
     _node = youtube
+    _thumbnail_url = "https://i3.ytimg.com/vi/{}/maxresdefault.jpg"
 
 
 def visit_youtube_node(self, node):

@@ -9,6 +9,7 @@ class vimeo(utils.video):
 
 class Vimeo(utils.Video):
     _node = vimeo
+    _thumbnail_url = "https://vumbnail.com/{}.jpg"
 
 
 def visit_vimeo_node(self, node):

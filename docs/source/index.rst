@@ -16,6 +16,8 @@ This module defines directives, code:`youtube` and :code:`vimeo` which insert vi
 
    .. vimeo:: 148751763
 
+..  youtube:: dQw4w9WgXcQ
+
 .. vimeo:: 148751763
 
 Usage

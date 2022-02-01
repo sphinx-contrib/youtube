@@ -9,7 +9,7 @@ The extension defines the directives, "youtube" and "vimeo", for embedding
 YouTube and Vimeo videos, respectively.
 '''
 
-requires = ['Sphinx>=0.6']
+requires = ['Sphinx>=0.6', "requests"]
 doc_requires = ["sphinx-copybutton", "furo"]
 
 setup(
