@@ -13,7 +13,7 @@ requires = ['Sphinx>=0.6']
 
 setup(
     name='sphinxcontrib-youtube',
-    version='1.0.1',
+    version='1.1.0',
     url='https://github.com/sphinx-contrib/youtube',
     license='BSD',
     author='Chris Pickel',
