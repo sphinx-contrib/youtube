@@ -46,16 +46,28 @@ directive::
     ..  youtube:: oHg5SJYRHA0
         :align: center
 
-In LaTeX output, the followinging code will be emitted for YouTube::
+To start the video at a specific time the parameter "url_parameters" may be used
+(quotes required for Vimeo videos)::
 
-    \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}
+    ..  youtube:: oHg5SJYRHA0
+        :url_parameters: ?start=300
+
+    .. vimeo:: 73214621
+        :url_parameters: "#t=3m13s"
+
+In LaTeX output, the following code will be emitted for YouTube::
+
+    \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}{?start=300}
 
 The user may customise the rendering of the URL by defining this command in 
 the premble. If they do not, then the default definition is used::
 
-    \newcommand{\sphinxcontribvimeo}[2]{\begin{quote}\begin{center}\fbox{\url{#1#2}}\end{center}\end{quote}}
+    \newcommand{\sphinxcontribyoutube}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}
 
 This prints a simple link to the video, enclosed in a box. LaTeX support for
 Vimeo is similar, except that the macro is named `\sphinxcontribvimeo`.
+
+**Note:** The third argument to this macro was introduced in version 1.1. Prior
+to this only the first two arguments were passed.
 
 ..  -*- mode: rst; fill-column: 79 -*-
