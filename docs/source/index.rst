@@ -4,30 +4,35 @@ sphinxcontrib-youtube
 Demo
 ----
 
-This module provides support for including YouTube and Vimeo videos in Sphinx rst documents.
+This module provides support for including YouTube and Vimeo videos in Sphinx :code:`rst` documents.
 
-This module defines directives, code:`youtube` and :code:`vimeo` which insert videos from the respective platforms. They take a single, required argument, wich is the video ID: 
+This module defines directives, :code:`youtube` and :code:`vimeo` which insert videos from the respective platforms. They take a single, required argument, wich is the video ID: 
 
 .. code-block:: rst 
    
    ..  youtube:: dQw4w9WgXcQ
 
+..  youtube:: dQw4w9WgXcQ
+   :align: center
+   :aspect: 16:9
+
 .. code-block:: rst
 
    .. vimeo:: 148751763
 
-..  youtube:: dQw4w9WgXcQ
-
 .. vimeo:: 148751763
+   :align: center
+   :aspect: 16:9
 
 Usage
 -----
 
+The referenced video will be embedded into HTML and Latex outputs, the behaviour will be slighly different for obvious reasons.
+
 HTML
 ^^^^
 
-The referenced video will be embedded into HTML and Latex outputs.  By default, the embedded video will be sized for 720p content. To control this, the
-parameters :code:`aspect`, :code:`width`, and :code:`height` may optionally be provided:
+By default, the embedded video will be sized for 720p content. To control this, the parameters :code:`aspect`, :code:`width`, and :code:`height` may optionally be provided:
 
 .. code-block:: rst
 
@@ -82,7 +87,27 @@ In LaTeX output, the following code will be emitted for the videos:
 
    \sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{"#t=0m43s"}
 
-The user may customise the rendering of the URL by defining this command in the preamble. If they do not, then the default definition is used:
+The user may customise the rendering of the URL by defining this command in the preamble. The captions will be downloaded to the latex folder and can thus be used as images in the :code:`.pdf` document. Here is an example of custom command for both the vimeo and the yoututbe output. This need to be added in the :code:`conf.py` file:
+
+.. code-block:: python
+
+   # conf.py 
+   # ...
+   # -- Option for Latex output ---------------------------------------------------
+
+   # create a custom sphinx output for the youtube and vimeo video
+   youtube_cmd = r"\newcommand{\sphinxcontribyoutube}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}" + "\n"
+   vimeo_cmd = r"\newcommand{\sphinxcontribvimeo}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}" + "\n"
+ 
+   latex_elements = {"preamble": youtube_cmd + vimeo_cmd}
+
+This example will show the video as a figure using the thumbnail as image and the url as caption (clickable link). This is the one we use for this very documentation. rember that the argument of your command are the following:
+
+-   #1: the platform url
+-   #2: the video ID (it's also the name of the image: :code:`#2.jpg`
+-   #3: the options of the url
+
+If no custom command is set in :code:`conf.py`, then the default definition is used:
 
 .. code-block:: latex
 

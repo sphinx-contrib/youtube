@@ -9,65 +9,108 @@ sphinxcontrib.youtube
     :target: https://badge.fury.io/py/sphinxcontrib-youtube
     :alt: PyPi version 
 
-This module provides support for including YouTube and Vimeo videos
-in Sphinx rst documents.
+Overview
+--------
 
-This module defines directives, `youtube` and `vimeo` which insert videos
-from the respective platforms. They take a single, required argument, a 
-YouTube video ID::
+This module provides support for including YouTube and Vimeo videos in Sphinx :code:`rst` documents.
 
-    ..  youtube:: oHg5SJYRHA0
+This module defines directives, :code:`youtube` and :code:`vimeo` which insert videos from the respective platforms. They take a single, required argument, wich is the video ID: 
 
-or a Vimeo video ID::
+.. code-block:: rst 
+   
+   ..  youtube:: dQw4w9WgXcQ
 
-    .. vimeo:: 486106801
+.. code-block:: rst
 
-The referenced video will be embedded into HTML output.  By default, the
-embedded video will be sized for 720p content.  To control this, the
-parameters "aspect", "width", and "height" may optionally be provided::
+   .. vimeo:: 148751763
 
-    ..  youtube:: oHg5SJYRHA0
-        :width: 640
-        :height: 480
+Usage
+-----
 
-    ..  youtube:: oHg5SJYRHA0
-        :aspect: 4:3
+The referenced video will be embedded into HTML and Latex outputs, the behaviour will be slighly different for obvious reasons.
 
-    ..  youtube:: oHg5SJYRHA0
-        :width: 100%
+HTML
+^^^^
 
-    ..  youtube:: oHg5SJYRHA0
-        :height: 200px
+By default, the embedded video will be sized for 720p content. To control this, the parameters :code:`aspect`, :code:`width`, and :code:`height` may optionally be provided:
 
-To set the alignment of the embedded video's iframe in the HTML output, an 
-optional "align" parameter can be specified, similar to the rst :image: 
-directive::
+.. code-block:: rst
 
-    ..  youtube:: oHg5SJYRHA0
-        :align: center
+   ..  youtube:: dQw4w9WgXcQ
+      :width: 640
+      :height: 480
 
-To start the video at a specific time the parameter "url_parameters" may be used
-(quotes required for Vimeo videos)::
+.. code-block:: rst
 
-    ..  youtube:: oHg5SJYRHA0
-        :url_parameters: ?start=300
+   ..  youtube:: dQw4w9WgXcQ
+      :aspect: 4:3
 
-    .. vimeo:: 73214621
-        :url_parameters: "#t=3m13s"
+.. code-block:: rst
 
-In LaTeX output, the following code will be emitted for YouTube::
+   ..  youtube:: dQw4w9WgXcQ
+      :width: 100%
 
-    \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}{?start=300}
+.. code-block:: rst
 
-The user may customise the rendering of the URL by defining this command in 
-the premble. If they do not, then the default definition is used::
+   ..  youtube:: dQw4w9WgXcQ
+      :height: 200px
+
+To set the alignment of the embedded video's iframe in the HTML output, an optional :code:`align` parameter can be specified, similar to the rst :code:`image` directive:
+
+.. code-block:: rst
+
+   ..  youtube:: dQw4w9WgXcQ
+      :align: center
+
+To start the video at a specific time the parameter "url_parameters" may be used (quotes required for Vimeo videos):
+
+.. code-block:: rst
+
+   ..  youtube:: dQw4w9WgXcQ
+      :url_parameters: ?start=43
+
+.. code-block:: rst
+
+   .. vimeo:: 148751763
+      :url_parameters: "#t=0m43s"
+
+Latex
+^^^^^
+
+In LaTeX output, the following code will be emitted for the videos:
+
+.. code-block:: latex
+
+   \sphinxcontribyoutube{https://youtu.be/}{dQw4w9WgXcQ}{?start=43}
+
+.. code-block:: latex
+
+   \sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{"#t=0m43s"}
+
+The user may customise the rendering of the URL by defining this command in the preamble. The captions will be downloaded to the latex folder and can thus be used as images in the :code:`.pdf` document. Here is an example of custom command for both the vimeo and the yoututbe output. This need to be added in the :code:`conf.py` file:
+
+.. code-block:: python
+
+   # conf.py 
+   # ...
+   # -- Option for Latex output ---------------------------------------------------
+
+   # create a custom sphinx output for the youtube and vimeo video
+   youtube_cmd = r"\newcommand{\sphinxcontribyoutube}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}" + "\n"
+   vimeo_cmd = r"\newcommand{\sphinxcontribvimeo}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}" + "\n"
+ 
+   latex_elements = {"preamble": youtube_cmd + vimeo_cmd}
+
+This example will show the video as a figure using the thumbnail as image and the url as caption (clickable link). This is the one we use for this very documentation. rember that the argument of your command are the following:
+
+-   #1: the platform url
+-   #2: the video ID (it's also the name of the image: :code:`#2.jpg`
+-   #3: the options of the url
+
+If no custom command is set in :code:`conf.py`, then the default definition is used:
+
+.. code-block:: latex
 
     \newcommand{\sphinxcontribyoutube}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}
 
-This prints a simple link to the video, enclosed in a box. LaTeX support for
-Vimeo is similar, except that the macro is named `\sphinxcontribvimeo`.
-
-**Note:** The third argument to this macro was introduced in version 1.1. Prior
-to this only the first two arguments were passed.
-
-..  -*- mode: rst; fill-column: 79 -*-
+This prints a simple link to the video, enclosed in a box. LaTeX support for Vimeo is similar, except that the macro is named :code:`\sphinxcontribvimeo`.

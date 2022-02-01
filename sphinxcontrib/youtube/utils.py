@@ -98,12 +98,16 @@ def depart_video_node(self, node):
 
 
 def visit_video_node_latex(self, node, platform, platform_url):
+    
+    folder = r"\graphicspath{ {./%s/}{./} }" % THUMBNAIL_DIR
+    if folder not in self.elements["preamble"]:
+        self.elements["preamble"] += folder + "\n"
 
-    macro = r"\sphinxcontrib%s" % platform
+    macro = f"\\sphinxcontrib{platform}"
     if macro not in self.elements["preamble"]:
-        self.elements["preamble"] += r"""
-        \newcommand{%s}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}
-        """ % macro
+        cmd = r"\newcommand{%s}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}" % macro
+        self.elements["preamble"] += cmd + "\n"
+    
     self.body.append('%s{%s}{%s}{%s}\n' % (macro, platform_url, node['id'], node['url_parameters']))
 
 
