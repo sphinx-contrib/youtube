@@ -55,6 +55,12 @@ To start the video at a specific time the parameter "url_parameters" may be used
     .. vimeo:: 73214621
         :url_parameters: "#t=3m13s"
 
+For YouTube "privacy mode", use the directive option
+``:privacy_mode:`` (and for vimeo, ``:url_options: ?dnt=1``)::
+
+    ..  youtube:: oHg5SJYRHA0
+        :privacy_mode:
+
 In LaTeX output, the following code will be emitted for YouTube::
 
     \sphinxcontribyoutube{https://youtu.be/}{oHg5SJYRHA0}{?start=300}

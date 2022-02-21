@@ -12,7 +12,10 @@ class YouTube(utils.Video):
 
 
 def visit_youtube_node(self, node):
-    return utils.visit_video_node(self, node, platform_url="https://www.youtube.com/embed/")
+    return utils.visit_video_node(self, node,
+                                  platform_url="https://www.youtube.com/embed/",
+                                  platform_url_privacy="https://www.youtube-nocookie.com/embed/"
+                                  )
 
 
 def visit_youtube_node_latex(self, node):

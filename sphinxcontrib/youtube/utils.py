@@ -25,11 +25,13 @@ class video(nodes.General, nodes.Element):
     pass
 
 
-def visit_video_node(self, node, platform_url):
+def visit_video_node(self, node, platform_url, platform_url_privacy=None):
     aspect = node["aspect"]
     width = node["width"]
     height = node["height"]
     url_parameters = node["url_parameters"]
+    if node.get('privacy_mode') and platform_url_privacy:
+        platform_url = platform_url_privacy
 
     if aspect is None:
         aspect = 16, 9
@@ -108,6 +110,7 @@ class Video(Directive):
         "aspect": directives.unchanged,
         "align": directives.unchanged,
         "url_parameters": directives.unchanged,
+        "privacy_mode": directives.unchanged,
     }
 
     def run(self):
@@ -132,7 +135,8 @@ class Video(Directive):
         height = get_size(self.options, "height")
         url_parameters = self.options.get("url_parameters", "")
         return [self._node(id=self.arguments[0], aspect=aspect, width=width,
-                height=height, align=align, url_parameters=url_parameters)]
+                height=height, align=align, url_parameters=url_parameters,
+                privacy_mode=self.options.get('privacy_mode'))]
 
 
 def unsupported_visit_video(self, node, platform):
