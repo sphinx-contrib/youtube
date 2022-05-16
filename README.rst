@@ -56,7 +56,7 @@ To start the video at a specific time the parameter "url_parameters" may be used
         :url_parameters: "#t=3m13s"
 
 For YouTube "privacy mode", use the directive option
-``:privacy_mode:`` (and for vimeo, ``:url_options: ?dnt=1``)::
+``:privacy_mode:`` (and for vimeo, ``:url_parameters: ?dnt=1``)::
 
     ..  youtube:: oHg5SJYRHA0
         :privacy_mode:
