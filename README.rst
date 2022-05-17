@@ -49,11 +49,13 @@ By default, the embedded video will be sized for 720p content. To control this, 
 
    ..  youtube:: dQw4w9WgXcQ
       :width: 100%
+      
+For YouTube "privacy mode", use the directive option :code:`:privacy_mode:` (and for vimeo, :code:`:url_parameters: ?dnt=1`):
 
-.. code-block:: rst
+.. code-block:: rst 
 
-   ..  youtube:: dQw4w9WgXcQ
-      :height: 200px
+    ..  youtube:: dQw4w9WgXcQ
+        :privacy_mode:
 
 To set the alignment of the embedded video's iframe in the HTML output, an optional :code:`align` parameter can be specified, similar to the rst :code:`image` directive:
 
