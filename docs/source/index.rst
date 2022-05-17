@@ -61,6 +61,13 @@ To set the alignment of the embedded video's iframe in the HTML output, an optio
 
    ..  youtube:: dQw4w9WgXcQ
       :align: center
+      
+For YouTube "privacy mode", use the directive option :privacy_mode: (and for vimeo, :url_parameters: ?dnt=1):
+
+.. code-block:: rst
+   
+   ..  youtube:: dQw4w9WgXcQ
+      :privacy_mode:
 
 To start the video at a specific time the parameter "url_parameters" may be used (quotes required for Vimeo videos):
 
