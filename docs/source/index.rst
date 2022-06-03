@@ -1,16 +1,8 @@
-sphinxcontrib.youtube
+sphinxcontrib-youtube
 =====================
 
-.. image:: https://img.shields.io/badge/License-BSD_3--Clause-orange.svg
-    :alt: license
-    :target: LICENCE
-    
-.. image:: https://badge.fury.io/py/sphinxcontrib-youtube.svg
-    :target: https://badge.fury.io/py/sphinxcontrib-youtube
-    :alt: PyPi version 
-
-Overview
---------
+Demo
+----
 
 This module provides support for including YouTube and Vimeo videos in Sphinx :code:`rst` documents.
 
@@ -20,9 +12,17 @@ This module defines directives, :code:`youtube` and :code:`vimeo` which insert v
    
    ..  youtube:: dQw4w9WgXcQ
 
+..  youtube:: dQw4w9WgXcQ
+   :align: center
+   :aspect: 16:9
+
 .. code-block:: rst
 
    .. vimeo:: 148751763
+
+.. vimeo:: 148751763
+   :align: center
+   :aspect: 16:9
 
 Usage
 -----
@@ -49,13 +49,11 @@ By default, the embedded video will be sized for 720p content. To control this, 
 
    ..  youtube:: dQw4w9WgXcQ
       :width: 100%
-      
-For YouTube "privacy mode", use the directive option :code:`:privacy_mode:` (and for vimeo, :code:`:url_parameters: ?dnt=1`):
 
-.. code-block:: rst 
+.. code-block:: rst
 
-    ..  youtube:: dQw4w9WgXcQ
-        :privacy_mode:
+   ..  youtube:: dQw4w9WgXcQ
+      :height: 200px
 
 To set the alignment of the embedded video's iframe in the HTML output, an optional :code:`align` parameter can be specified, similar to the rst :code:`image` directive:
 
@@ -63,6 +61,13 @@ To set the alignment of the embedded video's iframe in the HTML output, an optio
 
    ..  youtube:: dQw4w9WgXcQ
       :align: center
+      
+For YouTube "privacy mode", use the directive option :privacy_mode: (and for vimeo, :url_parameters: ?dnt=1):
+
+.. code-block:: rst
+   
+   ..  youtube:: dQw4w9WgXcQ
+      :privacy_mode:
 
 To start the video at a specific time the parameter "url_parameters" may be used (quotes required for Vimeo videos):
 
@@ -89,7 +94,7 @@ In LaTeX output, the following code will be emitted for the videos:
 
    \sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{"#t=0m43s"}
 
-The user may customise the rendering of the URL by defining this command in the preamble. The captions will be downloaded to the latex folder and can thus be used as images in the :code:`.pdf` document. Here is an example of custom command for both the vimeo and the yoututbe output. This needs to be added in the :code:`conf.py` file:
+The user may customise the rendering of the URL by defining this command in the preamble. The captions will be downloaded to the latex folder and can thus be used as images in the :code:`.pdf` document. We are using the `https://vumbnail.com`__ (vimeo) and `https://www.get-youtube-thumbnail.com`__ (youtube) web services to retrieve them. Here is an example of custom command for both the vimeo and the yoututbe output. This needs to be added in the :code:`conf.py` file:
 
 .. code-block:: python
 
@@ -116,3 +121,7 @@ If no custom command is set in :code:`conf.py`, then the default definition is u
     \newcommand{\sphinxcontribyoutube}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}
 
 This prints a simple link to the video, enclosed in a box. LaTeX support for Vimeo is similar, except that the macro is named :code:`\sphinxcontribvimeo`.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
