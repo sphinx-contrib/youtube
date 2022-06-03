@@ -80,7 +80,7 @@ def visit_video_node(self, node, platform_url, platform_url_privacy=None):
             "border": "0",
         }
         attrs = {
-            "src":  "{}{}".format(platform_url,node['id']),
+            "src":  "{}{}{}".format(platform_url,node['id'],url_parameters),
             "style": css(style),
         }
     if node["align"] != None: div_style["text-align"] = node["align"]
