@@ -23,7 +23,7 @@ author = 'David A. Ham, Chris Pickel and others'
 copyright = f'2011-{datetime.now().year}, {author}'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.0'
+release = '1.2.0'
 
 
 # -- General configuration -----------------------------------------------------

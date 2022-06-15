@@ -14,7 +14,7 @@ doc_requires = ["sphinx-copybutton", "furo"]
 
 setup(
     name='sphinxcontrib-youtube',
-    version='1.1.0',
+    version='1.2.0',
     url='https://github.com/sphinx-contrib/youtube',
     license='BSD',
     author='Chris Pickel',
