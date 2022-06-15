@@ -19,7 +19,7 @@ from datetime import datetime
 # -- Project information -------------------------------------------------------
 
 project = 'sphinxcontrib-youtube'
-author = 'Dr David Ham, Chris Pickel and others'
+author = 'David A. Ham, Chris Pickel and others'
 copyright = f'2011-{datetime.now().year}, {author}'
 
 # The full version, including alpha/beta/rc tags
