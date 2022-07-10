@@ -1,4 +1,7 @@
+"""Sphinx "youtube" extension"""
 from  . import youtube, vimeo, utils
+
+__version__ = '1.2.0'
     
 def setup(app):
     app.add_node(youtube.youtube, **youtube._NODE_VISITORS)

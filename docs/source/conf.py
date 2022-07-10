@@ -15,6 +15,7 @@
 # sys.path.insert(0, os.path.abspath('.'))
 from datetime import datetime
 
+from sphinxcontrib.youtube import __version__
 
 # -- Project information -------------------------------------------------------
 
@@ -23,7 +24,7 @@ author = 'David A. Ham, Chris Pickel and others'
 copyright = f'2011-{datetime.now().year}, {author}'
 
 # The full version, including alpha/beta/rc tags
-release = '1.2.0'
+release = __version__
 
 
 # -- General configuration -----------------------------------------------------
