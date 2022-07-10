@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 from . import utils
 
 
@@ -13,11 +12,15 @@ class Vimeo(utils.Video):
 
 
 def visit_vimeo_node(self, node):
-    return utils.visit_video_node(self, node, platform_url="https://player.vimeo.com/video/")
+    return utils.visit_video_node(
+        self, node, platform_url="https://player.vimeo.com/video/"
+    )
 
 
 def visit_vimeo_node_latex(self, node):
-    return utils.visit_video_node_latex(self, node, platform="vimeo", platform_url="https://player.vimeo.com/video/")
+    return utils.visit_video_node_latex(
+        self, node, platform="vimeo", platform_url="https://player.vimeo.com/video/"
+    )
 
 
 def unsupported_visit_vimeo(self, node):
@@ -25,9 +28,9 @@ def unsupported_visit_vimeo(self, node):
 
 
 _NODE_VISITORS = {
-    'html': (visit_vimeo_node, utils.depart_video_node),
-    'latex': (visit_vimeo_node_latex, utils.depart_video_node),
-    'man': (unsupported_visit_vimeo, None),
-    'texinfo': (unsupported_visit_vimeo, None),
-    'text': (unsupported_visit_vimeo, None)
+    "html": (visit_vimeo_node, utils.depart_video_node),
+    "latex": (visit_vimeo_node_latex, utils.depart_video_node),
+    "man": (unsupported_visit_vimeo, None),
+    "texinfo": (unsupported_visit_vimeo, None),
+    "text": (unsupported_visit_vimeo, None),
 }

@@ -6,10 +6,10 @@ Demo
 
 This module provides support for including YouTube and Vimeo videos in Sphinx :code:`rst` documents.
 
-This module defines directives, :code:`youtube` and :code:`vimeo` which insert videos from the respective platforms. They take a single, required argument, wich is the video ID: 
+This module defines directives, :code:`youtube` and :code:`vimeo` which insert videos from the respective platforms. They take a single, required argument, wich is the video ID:
 
-.. code-block:: rst 
-   
+.. code-block:: rst
+
    ..  youtube:: dQw4w9WgXcQ
 
 ..  youtube:: dQw4w9WgXcQ
@@ -61,11 +61,11 @@ To set the alignment of the embedded video's iframe in the HTML output, an optio
 
    ..  youtube:: dQw4w9WgXcQ
       :align: center
-      
+
 For YouTube "privacy mode", use the directive option :privacy_mode: (and for vimeo, :url_parameters: ?dnt=1):
 
 .. code-block:: rst
-   
+
    ..  youtube:: dQw4w9WgXcQ
       :privacy_mode:
 
@@ -98,14 +98,14 @@ The user may customise the rendering of the URL by defining this command in the 
 
 .. code-block:: python
 
-   # conf.py 
+   # conf.py
    # ...
    # -- Option for Latex output ---------------------------------------------------
 
    # create a custom sphinx output for the youtube and vimeo video
    youtube_cmd = r"\newcommand{\sphinxcontribyoutube}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}" + "\n"
    vimeo_cmd = r"\newcommand{\sphinxcontribvimeo}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}" + "\n"
- 
+
    latex_elements = {"preamble": youtube_cmd + vimeo_cmd}
 
 This example will show the video as a figure using the thumbnail as image and the url as caption (clickable link). This is the one we use for this very documentation. remember that the argument of your command are the following:

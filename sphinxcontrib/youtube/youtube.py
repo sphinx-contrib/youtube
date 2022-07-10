@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 from . import utils
 
 
@@ -13,14 +12,18 @@ class YouTube(utils.Video):
 
 
 def visit_youtube_node(self, node):
-    return utils.visit_video_node(self, node,
-                                  platform_url="https://www.youtube.com/embed/",
-                                  platform_url_privacy="https://www.youtube-nocookie.com/embed/"
-                                  )
+    return utils.visit_video_node(
+        self,
+        node,
+        platform_url="https://www.youtube.com/embed/",
+        platform_url_privacy="https://www.youtube-nocookie.com/embed/",
+    )
 
 
 def visit_youtube_node_latex(self, node):
-    return utils.visit_video_node_latex(self, node, platform="youtube", platform_url="https://youtu.be/")
+    return utils.visit_video_node_latex(
+        self, node, platform="youtube", platform_url="https://youtu.be/"
+    )
 
 
 def unsupported_visit_youtube(self, node):
@@ -28,9 +31,9 @@ def unsupported_visit_youtube(self, node):
 
 
 _NODE_VISITORS = {
-    'html': (visit_youtube_node, utils.depart_video_node),
-    'latex': (visit_youtube_node_latex, utils.depart_video_node),
-    'man': (unsupported_visit_youtube, None),
-    'texinfo': (unsupported_visit_youtube, None),
-    'text': (unsupported_visit_youtube, None)
+    "html": (visit_youtube_node, utils.depart_video_node),
+    "latex": (visit_youtube_node_latex, utils.depart_video_node),
+    "man": (unsupported_visit_youtube, None),
+    "texinfo": (unsupported_visit_youtube, None),
+    "text": (unsupported_visit_youtube, None),
 }
