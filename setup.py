@@ -11,6 +11,7 @@ YouTube and Vimeo videos, respectively.
 
 requires = ['Sphinx>=0.6', "requests"]
 doc_requires = ["sphinx-copybutton", "furo"]
+test_requires = ["pytest", "sphinx-pytest>=0.0.4"]
 
 setup(
     name='sphinxcontrib-youtube',
@@ -39,6 +40,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=requires,
-    extras_require={"doc": doc_requires},
+    extras_require={"doc": doc_requires, "testing": test_requires},
     namespace_packages=['sphinxcontrib'],
 )
