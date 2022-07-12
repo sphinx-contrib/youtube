@@ -182,6 +182,11 @@ def unsupported_visit_video(self, node, platform):
     raise nodes.SkipNode
 
 
+def merge_download_images(app, env, docnames, other):
+    """Merge remote images, when using parallel processing."""
+    env.remote_images.update(other.remote_images)
+
+
 def download_images(app, env):
 
     iterator = (
