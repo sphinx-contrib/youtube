@@ -6,7 +6,7 @@ Demo
 
 This module provides support for including YouTube and Vimeo videos in Sphinx :code:`rst` documents.
 
-This module defines directives, :code:`youtube` and :code:`vimeo` which insert videos from the respective platforms. They take a single, required argument, wich is the video ID: 
+This module defines directives, :code:`youtube` and :code:`vimeo` which insert videos from the respective platforms. They take a single, required argument, which is the video ID: 
 
 .. code-block:: rst 
    
@@ -27,7 +27,7 @@ This module defines directives, :code:`youtube` and :code:`vimeo` which insert v
 Usage
 -----
 
-The referenced video will be embedded into HTML and Latex outputs, the behaviour will be slighly different for obvious reasons.
+The referenced video will be embedded into HTML and Latex outputs, the behaviour will be slightly different for obvious reasons.
 
 HTML
 ^^^^

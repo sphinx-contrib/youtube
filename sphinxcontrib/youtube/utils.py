@@ -115,7 +115,7 @@ def visit_video_node_latex(self, node, platform, platform_url):
 
 class Video(Directive):
     _node = None # Subclasses should replace with node class.
-    _thumbnail_url = "{}" # url to retreive thumbnail images
+    _thumbnail_url = "{}" # url to retrieve thumbnail images
     has_content = True
     required_arguments = 1
     optional_arguments = 0
