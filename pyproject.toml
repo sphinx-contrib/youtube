@@ -1,3 +1,48 @@
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["flit_core >=3.5,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "sphinxcontrib.youtube"
+
+[project]
+name = "sphinxcontrib-youtube"
+dynamic = ["version", "description"]
+authors = [{name = "Chris Pickel", email = "sfiera@gmail.com"}]
+maintainers = [{name = "David A. Ham", email = "david.ham@imperial.ac.uk"}]
+license = {file = "LICENCE"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Documentation",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "Sphinx>=0.6",
+    "requests",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = '''
+This package contains the youtube Sphinx extension.
+The extension defines the directives, "youtube" and "vimeo", for embedding
+YouTube and Vimeo videos, respectively.'''
+
+[project.urls]
+Homepage = "https://github.com/sphinx-contrib/youtube"
+
+[project.optional-dependencies]
+doc = [
+    "sphinx-copybutton",
+    "furo",
+]
+testing = [
+    "pytest",
+    "sphinx-pytest>=0.0.4",
+]
