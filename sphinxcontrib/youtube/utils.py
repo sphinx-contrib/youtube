@@ -141,8 +141,8 @@ class Video(Directive):
         env = self.state.document.settings.env
         video_id = self.arguments[0]
         url = self._thumbnail_url.format(video_id)
-        env.remote_images[url] = Path(THUMBNAIL_DIR, f"{video_id}.jpg")
-        env.images.add_file("", env.remote_images[url])
+        env.video_remote_images[url] = Path(THUMBNAIL_DIR, f"{video_id}.jpg")
+        env.images.add_file("", env.video_remote_images[url])
 
         if "aspect" in self.options:
             aspect = self.options.get("aspect")
@@ -184,7 +184,7 @@ def unsupported_visit_video(self, node, platform):
 
 def merge_download_images(app, env, docnames, other):
     """Merge remote images, when using parallel processing."""
-    env.remote_images.update(other.remote_images)
+    env.video_remote_images.update(other.video_remote_images)
 
 
 def download_images(app, env):
@@ -195,9 +195,10 @@ def download_images(app, env):
         else status_iterator
     )
     msg = "Downloading remote images..."
-    for src in iterator(env.remote_images, msg, brown, len(env.remote_images)):
+    nb_images = len(env.video_remote_images)
+    for src in iterator(env.video_remote_images, msg, brown, nb_images):
 
-        dst = Path(app.outdir) / env.remote_images[src]
+        dst = Path(app.outdir) / env.video_remote_images[src]
         if not dst.is_file():
             logger.info(f"{src} -> {dst} (downloading)")
             with open(dst, "wb") as f:
@@ -211,7 +212,7 @@ def download_images(app, env):
 
 def configure_image_download(app):
 
-    app.env.remote_images = {}
+    app.env.video_remote_images = {}
 
     output_dir = Path(app.outdir) / THUMBNAIL_DIR
     output_dir.mkdir(exist_ok=True)
