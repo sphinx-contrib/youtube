@@ -189,6 +189,10 @@ def merge_download_images(app, env, docnames, other):
 
 def download_images(app, env):
 
+    # images should only be downloaded if the builder is Latex related
+    if "latex" not in app.builder.name:
+        return
+
     iterator = (
         app.builder.status_iterator
         if hasattr(app.builder, "status_iterator")
