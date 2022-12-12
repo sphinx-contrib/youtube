@@ -99,6 +99,15 @@ def depart_video_node(self, node):
     pass
 
 
+def visit_video_node_epub(self, node, platform_url):
+    url_parameters = node["url_parameters"]
+    link_url = "{}{}{}".format(platform_url, node["id"], url_parameters)
+
+    self.body.append(self.starttag(node, "a", CLASS='video_link_url', href=link_url))
+    self.body.append(link_url)
+    self.body.append("</a>")
+
+
 def visit_video_node_latex(self, node, platform, platform_url):
 
     folder = r"\graphicspath{ {./%s/}{./} }" % THUMBNAIL_DIR
