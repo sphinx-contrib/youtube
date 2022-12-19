@@ -81,6 +81,8 @@ To start the video at a specific time the parameter "url_parameters" may be used
    .. vimeo:: 148751763
       :url_parameters: "#t=0m43s"
 
+When generating the EPUB output, the videos will not be embedded. Instead, a link to the video will be added.
+
 Latex
 ^^^^^
 

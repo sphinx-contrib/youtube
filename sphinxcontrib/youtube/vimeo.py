@@ -17,6 +17,12 @@ def visit_vimeo_node(self, node):
     )
 
 
+def visit_vimeo_node_epub(self, node):
+    return utils.visit_video_node_epub(
+        self, node, platform_url="https://player.vimeo.com/video/"
+    )
+
+
 def visit_vimeo_node_latex(self, node):
     return utils.visit_video_node_latex(
         self, node, platform="vimeo", platform_url="https://player.vimeo.com/video/"
@@ -29,6 +35,7 @@ def unsupported_visit_vimeo(self, node):
 
 _NODE_VISITORS = {
     "html": (visit_vimeo_node, utils.depart_video_node),
+    "epub": (visit_vimeo_node_epub, utils.depart_video_node),
     "latex": (visit_vimeo_node_latex, utils.depart_video_node),
     "man": (unsupported_visit_vimeo, None),
     "texinfo": (unsupported_visit_vimeo, None),
