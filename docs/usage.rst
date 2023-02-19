@@ -27,7 +27,16 @@ This module defines directives, :code:`youtube` and :code:`vimeo` which insert v
 Usage
 -----
 
-The referenced video will be embedded into HTML and Latex outputs, the behaviour will be slightly different for obvious reasons.
+The referenced video will be embedded into HTML and Latex outputs, the behaviour will be different as Latex cannot display videos.
+
+Installation
+^^^^^^^^^^^^
+
+The package is avalaible on `pipy <https://pypi.org/project/sphinxcontrib-youtube/1.2.0/>`__ and can be installed with pip:
+
+.. code-block:: console
+
+   pip install sphinxcontrib-youtube
 
 HTML
 ^^^^
