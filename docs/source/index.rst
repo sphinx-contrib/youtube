@@ -32,7 +32,7 @@ The referenced video will be embedded into HTML and Latex outputs, the behaviour
 Installation
 ^^^^^^^^^^^^
 
-The package is avalaible on `pipy <https://pypi.org/project/sphinxcontrib-youtube/1.2.0/>`__ and can be installed with pip:
+The package is avalaible on `pipy <https://pypi.org/project/sphinxcontrib-youtube/>`__ and can be installed with pip:
 
 .. code-block:: console
 
