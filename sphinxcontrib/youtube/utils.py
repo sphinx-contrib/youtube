@@ -15,6 +15,7 @@ CONTROL_HEIGHT = 30
 
 THUMBNAIL_DIR = "_video_thumbnail"
 
+# -- helper methods ------------------------------------------------------------
 
 def get_size(d, key):
     """Return a valid css size and unit."""
@@ -31,112 +32,12 @@ def css(d):
     return "; ".join(sorted("%s: %s" % kv for kv in d.items()))
 
 
+# -- node and directive definition ---------------------------------------------
+
 class video(nodes.General, nodes.Element):
     """Video node."""
 
     pass
-
-
-def visit_video_node_html(self, node, platform_url_privacy=None):
-    """Visit html video node."""
-    aspect = node["aspect"]
-    width = node["width"]
-    height = node["height"]
-    url_parameters = node["url_parameters"]
-    platform_url = node["platform_url"]
-    platform_url_privacy = node["platform_url_privacy"]
-    if node.get("privacy_mode") and platform_url_privacy:
-        platform_url = platform_url_privacy
-
-    if aspect is None:
-        aspect = 16, 9
-
-    div_style = {}
-    if (height is None) and (width is not None) and (width[1] == "%"):
-        div_style = {
-            "padding-top": "%dpx" % CONTROL_HEIGHT,
-            "padding-bottom": "%f%%" % (width[0] * aspect[1] / aspect[0]),
-            "width": "%d%s" % width,
-            "position": "relative",
-        }
-        style = {
-            "position": "absolute",
-            "top": "0",
-            "left": "0",
-            "width": "100%",
-            "height": "100%",
-            "border": "0",
-        }
-        attrs = {
-            "src": "{}{}{}".format(platform_url, node["id"], url_parameters),
-            "style": css(style),
-        }
-    else:
-        if width is None:
-            if height is None:
-                width = 560, "px"
-            else:
-                width = height[0] * aspect[0] / aspect[1], "px"
-        if height is None:
-            height = width[0] * aspect[1] / aspect[0], "px"
-        style = {
-            "width": "%d%s" % width,
-            "height": "%d%s" % (height[0] + CONTROL_HEIGHT, height[1]),
-            "border": "0",
-        }
-        attrs = {
-            "src": "{}{}{}".format(platform_url, node["id"], url_parameters),
-            "style": css(style),
-        }
-    if node["align"] is not None:
-        div_style["text-align"] = node["align"]
-    attrs["allowfullscreen"] = "true"
-    div_attrs = {
-        "CLASS": "video_wrapper",
-        "style": css(div_style),
-    }
-    if node["align"] is not None:
-        div_attrs["CLASS"] += " align-%s" % node["align"]
-    self.body.append(self.starttag(node, "div", **div_attrs))
-    self.body.append(self.starttag(node, "iframe", **attrs))
-    self.body.append("</iframe></div>")
-
-
-def depart_video_node(self, node):
-    """Depart any video node."""
-    pass
-
-
-def visit_video_node_epub(self, node):
-    """Visit epub video node."""
-    url_parameters = node["url_parameters"]
-    link_url = "{}{}{}".format(node["platform_url"], node["id"], url_parameters)
-
-    self.body.append(self.starttag(node, "a", CLASS="video_link_url", href=link_url))
-    self.body.append(link_url)
-    self.body.append("</a>")
-
-
-def visit_video_node_latex(self, node):
-    """Visit latex video node."""
-    folder = r"\graphicspath{ {./%s/}{./} }" % THUMBNAIL_DIR
-    if folder not in self.elements["preamble"]:
-        self.elements["preamble"] += folder + "\n"
-
-    macro = f"\\sphinxcontrib{node['platform']}"
-    if macro not in self.elements["preamble"]:
-        cmd = (
-            r"\newcommand{%s}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}"
-            % macro
-        )
-        self.elements["preamble"] += cmd + "\n"
-
-    self.body.append(
-        "{}{{{}}}{{{}}}{{{}}}\n".format(
-            macro, node["platform_url"], node["id"], node["url_parameters"]
-        )
-    )
-
 
 class Video(Directive):
     """Abstract Video directive."""
@@ -209,12 +110,123 @@ class Video(Directive):
             )
         ]
 
+# -- builder specific methods --------------------------------------------------
+
+def visit_video_node_html(self, node, platform_url_privacy=None):
+    """Visit html video node."""
+    aspect = node["aspect"]
+    width = node["width"]
+    height = node["height"]
+    url_parameters = node["url_parameters"]
+    platform_url = node["platform_url"]
+    platform_url_privacy = node["platform_url_privacy"]
+    if node.get("privacy_mode") and platform_url_privacy:
+        platform_url = platform_url_privacy
+
+    if aspect is None:
+        aspect = 16, 9
+
+    div_style = {}
+    if (height is None) and (width is not None) and (width[1] == "%"):
+        div_style = {
+            "padding-top": "%dpx" % CONTROL_HEIGHT,
+            "padding-bottom": "%f%%" % (width[0] * aspect[1] / aspect[0]),
+            "width": "%d%s" % width,
+            "position": "relative",
+        }
+        style = {
+            "position": "absolute",
+            "top": "0",
+            "left": "0",
+            "width": "100%",
+            "height": "100%",
+            "border": "0",
+        }
+        attrs = {
+            "src": "{}{}{}".format(platform_url, node["id"], url_parameters),
+            "style": css(style),
+        }
+    else:
+        if width is None:
+            if height is None:
+                width = 560, "px"
+            else:
+                width = height[0] * aspect[0] / aspect[1], "px"
+        if height is None:
+            height = width[0] * aspect[1] / aspect[0], "px"
+        style = {
+            "width": "%d%s" % width,
+            "height": "%d%s" % (height[0] + CONTROL_HEIGHT, height[1]),
+            "border": "0",
+        }
+        attrs = {
+            "src": "{}{}{}".format(platform_url, node["id"], url_parameters),
+            "style": css(style),
+        }
+    if node["align"] is not None:
+        div_style["text-align"] = node["align"]
+    attrs["allowfullscreen"] = "true"
+    div_attrs = {
+        "CLASS": "video_wrapper",
+        "style": css(div_style),
+    }
+    if node["align"] is not None:
+        div_attrs["CLASS"] += " align-%s" % node["align"]
+    self.body.append(self.starttag(node, "div", **div_attrs))
+    self.body.append(self.starttag(node, "iframe", **attrs))
+    self.body.append("</iframe></div>")
+
+
+def visit_video_node_epub(self, node):
+    """Visit epub video node."""
+    url_parameters = node["url_parameters"]
+    link_url = "{}{}{}".format(node["platform_url"], node["id"], url_parameters)
+
+    self.body.append(self.starttag(node, "a", CLASS="video_link_url", href=link_url))
+    self.body.append(link_url)
+    self.body.append("</a>")
+
+
+def visit_video_node_latex(self, node):
+    """Visit latex video node."""
+    folder = r"\graphicspath{ {./%s/}{./} }" % THUMBNAIL_DIR
+    if folder not in self.elements["preamble"]:
+        self.elements["preamble"] += folder + "\n"
+
+    macro = f"\\sphinxcontrib{node['platform']}"
+    if macro not in self.elements["preamble"]:
+        cmd = (
+            r"\newcommand{%s}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}"
+            % macro
+        )
+        self.elements["preamble"] += cmd + "\n"
+
+    self.body.append(
+        "{}{{{}}}{{{}}}{{{}}}\n".format(
+            macro, node["platform_url"], node["id"], node["url_parameters"]
+        )
+    )
+
 
 def visit_video_node_unsupported(self, node):
     """Visit unsuported video node."""
     logger.warning(f"{node['platform']}: unsupported output format (node skipped)")
     raise nodes.SkipNode
 
+def depart_video_node(self, node):
+    """Depart any video node."""
+    pass
+
+_NODE_VISITORS = {
+    "html": (visit_video_node_html, depart_video_node),
+    "epub": (visit_video_node_epub, depart_video_node),
+    "latex": (visit_video_node_latex, depart_video_node),
+    "man": (visit_video_node_unsupported, depart_video_node),
+    "texinfo": (visit_video_node_unsupported, depart_video_node),
+    "text": (visit_video_node_unsupported, depart_video_node),
+}
+
+# -- manage dowloaded images ---------------------------------------------------
 
 def merge_download_images(app, env, docnames, other):
     """Merge remote images, when using parallel processing."""
@@ -255,13 +267,3 @@ def configure_image_download(app):
     output_dir = Path(app.outdir) / THUMBNAIL_DIR
     output_dir.mkdir(exist_ok=True)
     app.config.html_static_path.append(str(output_dir))
-
-
-_NODE_VISITORS = {
-    "html": (visit_video_node_html, depart_video_node),
-    "epub": (visit_video_node_epub, depart_video_node),
-    "latex": (visit_video_node_latex, depart_video_node),
-    "man": (visit_video_node_unsupported, depart_video_node),
-    "texinfo": (visit_video_node_unsupported, depart_video_node),
-    "text": (visit_video_node_unsupported, depart_video_node),
-}
