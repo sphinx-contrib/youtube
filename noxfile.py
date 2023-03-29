@@ -25,4 +25,5 @@ def test(session):
 def docs(session):
     """Build the documentation."""
     session.install(".[doc]")
-    session.run("sphinx-build", "-v", "-b", "html", "docs", "docs/_build/html")
+    build = session.posargs[0] if len(session.posargs) else "html"
+    session.run("sphinx-build", "-v", "-b", build, "docs", f"docs/_build/{build}")

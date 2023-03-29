@@ -38,7 +38,7 @@ Homepage = "https://github.com/sphinx-contrib/youtube"
 [project.optional-dependencies]
 dev = ["nox"]
 doc = ["sphinx-copybutton", "pydata-sphinx-theme", "sphinx-design"]
-test = ["pytest", "sphinx-pytest>=0.0.4"]
+test = ["pytest", "beautifulsoup4", "pytest-regressions", "pytest-cov"]
 
 [tool.ruff]
 ignore-init-module-imports = true
@@ -51,3 +51,6 @@ docstring-quotes = "double"
 
 [tool.ruff.pydocstyle]
 convention = "google"
+
+[tool.coverage.run]
+source = ["sphinxcontrib.youtube"]

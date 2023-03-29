@@ -197,7 +197,7 @@ class Video(Directive):
 
 def unsupported_visit_video(self, node, platform):
     """Visit unsuported video node."""
-    self.builder.warn(f"{platform}: unsupported output format (node skipped)")
+    logger.warning(f"{platform}: unsupported output format (node skipped)")
     raise nodes.SkipNode
 
 
