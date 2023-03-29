@@ -42,8 +42,8 @@ def visit_video_node_html(self, node, platform_url_privacy=None):
     aspect = node["aspect"]
     width = node["width"]
     height = node["height"]
-    platform_url = node["platform_url"]
     url_parameters = node["url_parameters"]
+    platform_url = node["platform_url"]
     platform_url_privacy = node["platform_url_privacy"]
     if node.get("privacy_mode") and platform_url_privacy:
         platform_url = platform_url_privacy
@@ -205,7 +205,7 @@ class Video(Directive):
                 privacy_mode=self.options.get("privacy_mode"),
                 platform=self._platform,
                 platform_url=self._platform_url,
-                platform_url_privacy = self._platform_url_privacy
+                platform_url_privacy=self._platform_url_privacy,
             )
         ]
 
@@ -255,3 +255,13 @@ def configure_image_download(app):
     output_dir = Path(app.outdir) / THUMBNAIL_DIR
     output_dir.mkdir(exist_ok=True)
     app.config.html_static_path.append(str(output_dir))
+
+
+_NODE_VISITORS = {
+    "html": (visit_video_node_html, depart_video_node),
+    "epub": (visit_video_node_epub, depart_video_node),
+    "latex": (visit_video_node_latex, depart_video_node),
+    "man": (visit_video_node_unsupported, depart_video_node),
+    "texinfo": (visit_video_node_unsupported, depart_video_node),
+    "text": (visit_video_node_unsupported, depart_video_node),
+}
