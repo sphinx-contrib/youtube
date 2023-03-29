@@ -15,7 +15,7 @@ class YouTube(utils.Video):
     _node = youtube
     _thumbnail_url = "https://i3.ytimg.com/vi/{}/maxresdefault.jpg"
     _platform = "youtube"
-    _platform_url="https://youtu.be/"
+    _platform_url="https://youtube.com/"
     _platform_url_privacy="https://www.youtube-nocookie.com/embed/"
 
 

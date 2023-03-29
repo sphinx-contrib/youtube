@@ -39,7 +39,7 @@ def test_latex(app, status, warning):
     assert r"\newcommand{\sphinxcontribyoutube}" in result
     assert r"\newcommand{\sphinxcontribvimeo}" in result
 
-    assert r"\sphinxcontribyoutube{https://youtu.be/}{dQw4w9WgXcQ}{}" in result
+    assert r"\sphinxcontribyoutube{https://youtube.com/}{dQw4w9WgXcQ}{}" in result
     assert r"\sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{}" in result
 
 # -- Epub related tests --------------------------------------------------------
