@@ -39,11 +39,6 @@ YouTube and Vimeo videos, respectively.'''
 Homepage = "https://github.com/sphinx-contrib/youtube"
 
 [project.optional-dependencies]
-doc = [
-    "sphinx-copybutton",
-    "furo",
-]
-testing = [
-    "pytest",
-    "sphinx-pytest>=0.0.4",
-]
+dev = ["nox"]
+doc = ["sphinx-copybutton", "furo"]
+test = ["pytest", "sphinx-pytest>=0.0.4"]
