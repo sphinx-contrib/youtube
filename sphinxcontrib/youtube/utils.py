@@ -37,12 +37,14 @@ class video(nodes.General, nodes.Element):
     pass
 
 
-def visit_video_node(self, node, platform_url, platform_url_privacy=None):
+def visit_video_node_html(self, node, platform_url_privacy=None):
     """Visit html video node."""
     aspect = node["aspect"]
     width = node["width"]
     height = node["height"]
+    platform_url = node["platform_url"]
     url_parameters = node["url_parameters"]
+    platform_url_privacy = node["platform_url_privacy"]
     if node.get("privacy_mode") and platform_url_privacy:
         platform_url = platform_url_privacy
 
@@ -105,23 +107,23 @@ def depart_video_node(self, node):
     pass
 
 
-def visit_video_node_epub(self, node, platform_url):
+def visit_video_node_epub(self, node):
     """Visit epub video node."""
     url_parameters = node["url_parameters"]
-    link_url = "{}{}{}".format(platform_url, node["id"], url_parameters)
+    link_url = "{}{}{}".format(node["platform_url"], node["id"], url_parameters)
 
     self.body.append(self.starttag(node, "a", CLASS="video_link_url", href=link_url))
     self.body.append(link_url)
     self.body.append("</a>")
 
 
-def visit_video_node_latex(self, node, platform, platform_url):
+def visit_video_node_latex(self, node):
     """Visit latex video node."""
     folder = r"\graphicspath{ {./%s/}{./} }" % THUMBNAIL_DIR
     if folder not in self.elements["preamble"]:
         self.elements["preamble"] += folder + "\n"
 
-    macro = f"\\sphinxcontrib{platform}"
+    macro = f"\\sphinxcontrib{node['platform']}"
     if macro not in self.elements["preamble"]:
         cmd = (
             r"\newcommand{%s}[3]{\begin{quote}\begin{center}\fbox{\url{#1#2#3}}\end{center}\end{quote}}"
@@ -131,7 +133,7 @@ def visit_video_node_latex(self, node, platform, platform_url):
 
     self.body.append(
         "{}{{{}}}{{{}}}{{{}}}\n".format(
-            macro, platform_url, node["id"], node["url_parameters"]
+            macro, node["platform_url"], node["id"], node["url_parameters"]
         )
     )
 
@@ -139,8 +141,21 @@ def visit_video_node_latex(self, node, platform, platform_url):
 class Video(Directive):
     """Abstract Video directive."""
 
-    _node = None  # Subclasses should replace with node class.
-    _thumbnail_url = "{}"  # url to retrieve thumbnail images
+    _node = None
+    "Subclasses should replace with node class."
+
+    _thumbnail_url = "{}"
+    "url to retrieve thumbnail images"
+
+    _platform = ""
+    "name of the platform"
+
+    _platform_url = ""
+    "url of the platform video provider"
+
+    _platform_url_privacy = ""
+    "the aleternative url to provide the video privately"
+
     has_content = True
     required_arguments = 1
     optional_arguments = 0
@@ -179,25 +194,25 @@ class Video(Directive):
         else:
             align = None
 
-        width = get_size(self.options, "width")
-        height = get_size(self.options, "height")
-        url_parameters = self.options.get("url_parameters", "")
         return [
             self._node(
                 id=self.arguments[0],
                 aspect=aspect,
-                width=width,
-                height=height,
+                width=get_size(self.options, "width"),
+                height=get_size(self.options, "height"),
                 align=align,
-                url_parameters=url_parameters,
+                url_parameters=self.options.get("url_parameters", ""),
                 privacy_mode=self.options.get("privacy_mode"),
+                platform=self._platform,
+                platform_url=self._platform_url,
+                platform_url_privacy = self._platform_url_privacy
             )
         ]
 
 
-def unsupported_visit_video(self, node, platform):
+def visit_video_node_unsupported(self, node):
     """Visit unsuported video node."""
-    logger.warning(f"{platform}: unsupported output format (node skipped)")
+    logger.warning(f"{node['platform']}: unsupported output format (node skipped)")
     raise nodes.SkipNode
 
 

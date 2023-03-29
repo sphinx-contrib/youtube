@@ -14,40 +14,22 @@ class YouTube(utils.Video):
 
     _node = youtube
     _thumbnail_url = "https://i3.ytimg.com/vi/{}/maxresdefault.jpg"
+    _platform = "youtube"
+    _platform_url="https://youtu.be/"
+    _platform_url_privacy="https://www.youtube-nocookie.com/embed/"
 
 
 def visit_youtube_node(self, node):
     """Custom html visit node."""
-    return utils.visit_video_node(
-        self,
-        node,
-        platform_url="https://www.youtube.com/embed/",
-        platform_url_privacy="https://www.youtube-nocookie.com/embed/",
-    )
-
-
-def visit_youtube_node_epub(self, node):
-    """Custom epub visit node."""
-    return utils.visit_video_node_epub(self, node, platform_url="https://youtu.be/")
-
-
-def visit_youtube_node_latex(self, node):
-    """Custom latex visit node."""
-    return utils.visit_video_node_latex(
-        self, node, platform="youtube", platform_url="https://youtu.be/"
-    )
-
-
-def unsupported_visit_youtube(self, node):
-    """Custom unsupported visit node."""
-    return utils.unsupported_visit_video(self, node, platform="youtube")
+    node["platform_url"] = "https://www.youtube.com/embed/"
+    return utils.visit_video_node_html(self,node)
 
 
 _NODE_VISITORS = {
     "html": (visit_youtube_node, utils.depart_video_node),
-    "epub": (visit_youtube_node_epub, utils.depart_video_node),
-    "latex": (visit_youtube_node_latex, utils.depart_video_node),
-    "man": (unsupported_visit_youtube, None),
-    "texinfo": (unsupported_visit_youtube, None),
-    "text": (unsupported_visit_youtube, None),
+    "epub": (utils.visit_video_node_epub, utils.depart_video_node),
+    "latex": (utils.visit_video_node_latex, utils.depart_video_node),
+    "man": (utils.visit_video_node_unsupported, utils.depart_video_node),
+    "texinfo": (utils.visit_video_node_unsupported, utils.depart_video_node),
+    "text": (utils.visit_video_node_unsupported, utils.depart_video_node),
 }
