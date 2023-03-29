@@ -39,3 +39,15 @@ Homepage = "https://github.com/sphinx-contrib/youtube"
 dev = ["nox"]
 doc = ["sphinx-copybutton", "furo"]
 test = ["pytest", "sphinx-pytest>=0.0.4"]
+
+[tool.ruff]
+ignore-init-module-imports = true
+fix = true
+select = ["E", "F", "W", "I", "D", "RUF"]
+ignore = ["E501"]  # line too long | Black take care of it
+
+[tool.ruff.flake8-quotes]
+docstring-quotes = "double"
+
+[tool.ruff.pydocstyle]
+convention = "google"

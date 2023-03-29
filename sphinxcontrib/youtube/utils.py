@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""Skeleton of the video directive ready to be extended for specific providers."""
 
 import re
 from pathlib import Path
@@ -17,6 +17,7 @@ THUMBNAIL_DIR = "_video_thumbnail"
 
 
 def get_size(d, key):
+    """Return a valid css size and unit."""
     if key not in d:
         return None
     m = re.match(r"(\d+)(|%|px)$", d[key])
@@ -26,14 +27,18 @@ def get_size(d, key):
 
 
 def css(d):
+    """Return a valid css style string."""
     return "; ".join(sorted("%s: %s" % kv for kv in d.items()))
 
 
 class video(nodes.General, nodes.Element):
+    """Video node."""
+
     pass
 
 
 def visit_video_node(self, node, platform_url, platform_url_privacy=None):
+    """Visit html video node."""
     aspect = node["aspect"]
     width = node["width"]
     height = node["height"]
@@ -96,10 +101,12 @@ def visit_video_node(self, node, platform_url, platform_url_privacy=None):
 
 
 def depart_video_node(self, node):
+    """Depart any video node."""
     pass
 
 
 def visit_video_node_epub(self, node, platform_url):
+    """Visit epub video node."""
     url_parameters = node["url_parameters"]
     link_url = "{}{}{}".format(platform_url, node["id"], url_parameters)
 
@@ -109,7 +116,7 @@ def visit_video_node_epub(self, node, platform_url):
 
 
 def visit_video_node_latex(self, node, platform, platform_url):
-
+    """Visit latex video node."""
     folder = r"\graphicspath{ {./%s/}{./} }" % THUMBNAIL_DIR
     if folder not in self.elements["preamble"]:
         self.elements["preamble"] += folder + "\n"
@@ -130,6 +137,8 @@ def visit_video_node_latex(self, node, platform, platform_url):
 
 
 class Video(Directive):
+    """Abstract Video directive."""
+
     _node = None  # Subclasses should replace with node class.
     _thumbnail_url = "{}"  # url to retrieve thumbnail images
     has_content = True
@@ -146,7 +155,7 @@ class Video(Directive):
     }
 
     def run(self):
-
+        """Run the directive."""
         env = self.state.document.settings.env
         video_id = self.arguments[0]
         url = self._thumbnail_url.format(video_id)
@@ -187,6 +196,7 @@ class Video(Directive):
 
 
 def unsupported_visit_video(self, node, platform):
+    """Visit unsuported video node."""
     self.builder.warn(f"{platform}: unsupported output format (node skipped)")
     raise nodes.SkipNode
 
@@ -197,7 +207,7 @@ def merge_download_images(app, env, docnames, other):
 
 
 def download_images(app, env):
-
+    """Download thumbnails for the latex build."""
     # images should only be downloaded if the builder is Latex related
     if "latex" not in app.builder.name:
         return
@@ -224,7 +234,7 @@ def download_images(app, env):
 
 
 def configure_image_download(app):
-
+    """Configure Sphinx to download video thumbnails."""
     app.env.video_remote_images = {}
 
     output_dir = Path(app.outdir) / THUMBNAIL_DIR
