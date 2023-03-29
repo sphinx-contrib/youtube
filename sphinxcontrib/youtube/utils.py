@@ -17,6 +17,7 @@ THUMBNAIL_DIR = "_video_thumbnail"
 
 # -- helper methods ------------------------------------------------------------
 
+
 def get_size(d, key):
     """Return a valid css size and unit."""
     if key not in d:
@@ -34,10 +35,12 @@ def css(d):
 
 # -- node and directive definition ---------------------------------------------
 
+
 class video(nodes.General, nodes.Element):
     """Video node."""
 
     pass
+
 
 class Video(Directive):
     """Abstract Video directive."""
@@ -110,7 +113,9 @@ class Video(Directive):
             )
         ]
 
+
 # -- builder specific methods --------------------------------------------------
+
 
 def visit_video_node_html(self, node, platform_url_privacy=None):
     """Visit html video node."""
@@ -213,9 +218,11 @@ def visit_video_node_unsupported(self, node):
     logger.warning(f"{node['platform']}: unsupported output format (node skipped)")
     raise nodes.SkipNode
 
+
 def depart_video_node(self, node):
     """Depart any video node."""
     pass
+
 
 _NODE_VISITORS = {
     "html": (visit_video_node_html, depart_video_node),
@@ -227,6 +234,7 @@ _NODE_VISITORS = {
 }
 
 # -- manage dowloaded images ---------------------------------------------------
+
 
 def merge_download_images(app, env, docnames, other):
     """Merge remote images, when using parallel processing."""
