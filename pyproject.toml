@@ -37,7 +37,7 @@ Homepage = "https://github.com/sphinx-contrib/youtube"
 
 [project.optional-dependencies]
 dev = ["nox"]
-doc = ["sphinx-copybutton", "furo"]
+doc = ["sphinx-copybutton", "pydata-sphinx-theme", "sphinx-design"]
 test = ["pytest", "sphinx-pytest>=0.0.4"]
 
 [tool.ruff]
