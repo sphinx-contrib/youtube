@@ -21,9 +21,7 @@ def visit_youtube_node(self, node):
 
 
 def visit_youtube_node_epub(self, node):
-    return utils.visit_video_node_epub(
-        self, node, platform_url="https://youtu.be/"
-    )
+    return utils.visit_video_node_epub(self, node, platform_url="https://youtu.be/")
 
 
 def visit_youtube_node_latex(self, node):
