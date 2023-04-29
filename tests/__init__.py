@@ -1,1 +1,1 @@
-"""Make tests a package to allow coverage to retreive data."""
+"""Make tests a package to allow coverage to retrieve data."""

@@ -4,7 +4,7 @@ from . import utils
 
 
 class vimeo(utils.video):
-    """empty video node class."""
+    """Empty video node class."""
 
     pass
 
