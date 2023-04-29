@@ -1,5 +1,5 @@
-sphinxcontrib-youtube
-=====================
+Getting started
+===============
 
 Demo
 ----
