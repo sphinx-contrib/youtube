@@ -55,10 +55,12 @@ Then install the development version of the extension:
    pip install -e .[dev]
 
 This will install the **sphinxcontrib-youtube** library, together with two
-additional tools: -   `pre-commit <https://pre-commit.com>`__ for automatically
-enforcing code standards and quality checks before commits. -   `nox
-<https://nox.thea.codes/en/stable/>`__, for automating common development
-tasks.
+additional tools: 
+
+- `pre-commit <https://pre-commit.com>`__ for automatically
+  enforcing code standards and quality checks before commits. 
+- `nox <https://nox.thea.codes/en/stable/>`__, for automating
+  common development tasks.
 
 Lastly, activate the pre-commit hooks by running:
 
