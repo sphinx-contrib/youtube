@@ -20,14 +20,38 @@ This module defines directives, :code:`youtube` and :code:`vimeo` which insert v
 
    .. vimeo:: 148751763
 
-.. vimeo:: 148751763
+.. vimeo:: 486557682
    :align: center
    :aspect: 16:9
 
 Usage
 -----
 
-The referenced video will be embedded into HTML and Latex outputs, the behaviour will be slightly different for obvious reasons.
+The referenced video will be embedded into HTML and LaTeX outputs, the behaviour will be different as LaTeX cannot display videos.
+
+Installation
+^^^^^^^^^^^^
+
+The package is avalaible on `pipy <https://pypi.org/project/sphinxcontrib-youtube/1.2.0/>`__ and can be installed with pip:
+
+.. code-block:: console
+
+   pip install sphinxcontrib-youtube
+
+Configuration
+^^^^^^^^^^^^^
+
+Add `"sphinxcontrib.youtube"` to the `extensions` list in :file:`conf.py`. For
+example:
+
+.. code-block:: python3
+
+   extensions = [
+       'sphinx.ext.intersphinx',
+       'sphinxcontrib.youtube'
+   ]
+
+
 
 HTML
 ^^^^
@@ -78,12 +102,12 @@ To start the video at a specific time the parameter "url_parameters" may be used
 
 .. code-block:: rst
 
-   .. vimeo:: 148751763
+   .. vimeo:: 486557682
       :url_parameters: "#t=0m43s"
 
 When generating the EPUB output, the videos will not be embedded. Instead, a link to the video will be added.
 
-Latex
+LaTeX
 ^^^^^
 
 In LaTeX output, the following code will be emitted for the videos:
@@ -102,7 +126,7 @@ The user may customise the rendering of the URL by defining this command in the 
 
    # conf.py
    # ...
-   # -- Option for Latex output ---------------------------------------------------
+   # -- Option for LaTeX output ---------------------------------------------------
 
    # create a custom sphinx output for the youtube and vimeo video
    youtube_cmd = r"\newcommand{\sphinxcontribyoutube}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}" + "\n"

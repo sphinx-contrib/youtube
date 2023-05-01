@@ -25,8 +25,6 @@ This module defines directives, youtube and vimeo which insert videos from the r
 Documentation contents
 ----------------------
 
-The documentation contains 2 main sections:
-
 .. grid:: 1 2 2 2
 
    .. grid-item::
@@ -41,4 +39,4 @@ The documentation contains 2 main sections:
       .. card:: Contribute
          :link: contribute.html
 
-         Help us improve the lib.
+         Help us improve the library.
