@@ -6,8 +6,9 @@ from pathlib import Path
 import requests
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
-from sphinx.util import logging, status_iterator
+from sphinx.util import logging
 from sphinx.util.console import brown
+from sphinx.util.display import status_iterator
 
 logger = logging.getLogger(__name__)
 
