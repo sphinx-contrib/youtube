@@ -17,7 +17,7 @@ class PeerTube(utils.Video):
     """Custom version of the Video Directive."""
 
     _node = peertube
-    _thumbnail_url = ""
+    _thumbnail_url = "{}.jpg"
     _platform = "PeerTube"
     _platform_url = "https://peertube.tv/w/"
 
