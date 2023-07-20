@@ -88,7 +88,7 @@ def test_vimeo_epub(app, status, warning, file_regression):
     file_regression.check(video, basename="vimeo", extension=".xhtml")
 
 @pytest.mark.sphinx("epub", testroot="video")
-def test_vimeo_epub(app, status, warning, file_regression):
+def test_peertube_epub(app, status, warning, file_regression):
     """Test a peertube video in epub build."""
     app.builder.build_all()
 
