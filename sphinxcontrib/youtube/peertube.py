@@ -34,7 +34,9 @@ class PeerTube(utils.Video):
 
 def visit_peertube_node(self, node):
     """Custom html visit node."""
-    if "server" not in node:
+    if "server" in node:
+        server = node["server"]
+    else:
         server = "peertube.tv"  # default
     node["platform_url"] = f"https://{server}/videos/embed/"
     return utils.visit_video_node_html(self, node)
