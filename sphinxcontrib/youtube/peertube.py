@@ -17,6 +17,7 @@ class PeerTube(utils.Video):
     _node = peertube
     _thumbnail_url = ""
     _platform = "PeerTube"
+    _platform_url = "https://peertube.tv/w/"
 
     option_spec = {
         "width": directives.unchanged,

@@ -26,9 +26,9 @@ This module defines directives, :code:`youtube` and :code:`vimeo` which insert v
 
 .. code-block:: rst
 
-   .. peertube:: 148751763
+   .. peertube:: 327a21b3-374e-4373-8b2c-494c9f5e1f19
 
-.. peertube:: 148751763
+.. peertube:: 327a21b3-374e-4373-8b2c-494c9f5e1f19
    :align: center
    :aspect: 16:9
 

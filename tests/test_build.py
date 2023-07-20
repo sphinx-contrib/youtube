@@ -59,7 +59,7 @@ def test_latex(app, status, warning):
         r"\sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{}" in result
     )
     assert (
-        r"\sphinxcontribpeertube{https://player.peertube.com/video/}{148751763}{}" in result
+        r"\sphinxcontribpeertube{https://peertube.tv/w/}{7ewepW25CTgkktwFpjFuPK}{}" in result
     )
 
 
