@@ -21,20 +21,20 @@ class PeerTube(utils.Video):
     _platform = "PeerTube"
     _platform_url = "https://peertube.tv/w/"
 
+    # optional options available
     option_spec = {
         "width": directives.unchanged,
         "height": directives.unchanged,
         "aspect": directives.unchanged,
         "align": directives.unchanged,
         "url_parameters": directives.unchanged,
-        "server": directives.unchanged,
+        "server_url": directives.unchanged,
     }
 
 
 def visit_peertube_node(self, node):
     """Custom html visit node."""
-    server = node["server"]
-    if server is None:
+    if "server" not in node:
         server = "peertube.tv"  # default
     node["platform_url"] = f"https://{server}/videos/embed/"
     return utils.visit_video_node_html(self, node)
