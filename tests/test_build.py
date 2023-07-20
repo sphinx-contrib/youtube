@@ -106,7 +106,7 @@ def test_peertube_epub(app, status, warning, file_regression):
 
 @pytest.mark.sphinx("text", testroot="video")
 def test_youtube_unsupported(app, status, warning):
-    """Test a youtube video in unsuprted build."""
+    """Test a youtube video in unsupported build."""
     app.builder.build_all()
 
     assert "unsupported output format (node skipped)" in warning.getvalue()
