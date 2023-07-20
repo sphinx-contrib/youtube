@@ -30,7 +30,7 @@ content-type = "text/plain"
 text = '''
 This package contains the youtube Sphinx extension.
 The extension defines the directives, "youtube" and "vimeo", for embedding
-YouTube and Vimeo videos, respectively.'''
+YouTube, Vimeo and Peertube videos, respectively.'''
 
 [project.urls]
 Homepage = "https://github.com/sphinx-contrib/youtube"

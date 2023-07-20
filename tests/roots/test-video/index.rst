@@ -5,3 +5,4 @@ index
 
     vimeo
     youtube
+    peertube

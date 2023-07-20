@@ -24,6 +24,14 @@ This module defines directives, :code:`youtube` and :code:`vimeo` which insert v
    :align: center
    :aspect: 16:9
 
+.. code-block:: rst
+
+   .. peertube:: 148751763
+
+.. peertube:: 148751763
+   :align: center
+   :aspect: 16:9
+
 Usage
 -----
 
@@ -104,6 +112,11 @@ To start the video at a specific time the parameter "url_parameters" may be used
 
    .. vimeo:: 486557682
       :url_parameters: "#t=0m43s"
+
+.. code-block:: rst
+
+   .. peertube:: 486557682
+      :server_url: "peertube.tv"
 
 When generating the EPUB output, the videos will not be embedded. Instead, a link to the video will be added.
 

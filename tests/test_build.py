@@ -22,13 +22,23 @@ def test_youtube_html(app, status, warning, file_regression):
 
 @pytest.mark.sphinx(testroot="video")
 def test_vimeo_html(app, status, warning, file_regression):
-    """Test a youtube video in html build."""
+    """Test a vimeo video in html build."""
     app.builder.build_all()
 
     html = (app.outdir / "vimeo.html").read_text(encoding="utf8")
     html = BeautifulSoup(html, "html.parser")
     video = html.select(".video_wrapper")[0].prettify(formatter=fmt)
     file_regression.check(video, basename="vimeo", extension=".html")
+
+@pytest.mark.sphinx(testroot="video")
+def test_peertube_html(app, status, warning, file_regression):
+    """Test a peertube video in html build."""
+    app.builder.build_all()
+
+    html = (app.outdir / "peertube.html").read_text(encoding="utf8")
+    html = BeautifulSoup(html, "html.parser")
+    video = html.select(".video_wrapper")[0].prettify(formatter=fmt)
+    file_regression.check(video, basename="peertube", extension=".html")
 
 
 # -- Latex related tests -------------------------------------------------------
@@ -42,10 +52,14 @@ def test_latex(app, status, warning):
 
     assert r"\newcommand{\sphinxcontribyoutube}" in result
     assert r"\newcommand{\sphinxcontribvimeo}" in result
+    assert r"\newcommand{\sphinxcontribpeertube}" in result
 
     assert r"\sphinxcontribyoutube{https://youtu.be/}{dQw4w9WgXcQ}{}" in result
     assert (
         r"\sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{}" in result
+    )
+    assert (
+        r"\sphinxcontribpeertube{https://player.peertube.com/video/}{148751763}{}" in result
     )
 
 
@@ -65,13 +79,23 @@ def test_youtube_epub(app, status, warning, file_regression):
 
 @pytest.mark.sphinx("epub", testroot="video")
 def test_vimeo_epub(app, status, warning, file_regression):
-    """Test a youtube video in epub build."""
+    """Test a vimeo video in epub build."""
     app.builder.build_all()
 
     xhtml = (app.outdir / "vimeo.xhtml").read_text(encoding="utf8")
     xhtml = BeautifulSoup(xhtml, "html.parser")
     video = xhtml.select(".video_link_url")[0].prettify(formatter=fmt)
     file_regression.check(video, basename="vimeo", extension=".xhtml")
+
+@pytest.mark.sphinx("epub", testroot="video")
+def test_vimeo_epub(app, status, warning, file_regression):
+    """Test a peertube video in epub build."""
+    app.builder.build_all()
+
+    xhtml = (app.outdir / "peertube.xhtml").read_text(encoding="utf8")
+    xhtml = BeautifulSoup(xhtml, "html.parser")
+    video = xhtml.select(".video_link_url")[0].prettify(formatter=fmt)
+    file_regression.check(video, basename="peertube", extension=".xhtml")
 
 
 # -- Unsuported builders -------------------------------------------------------
