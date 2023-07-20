@@ -30,6 +30,7 @@ def test_vimeo_html(app, status, warning, file_regression):
     video = html.select(".video_wrapper")[0].prettify(formatter=fmt)
     file_regression.check(video, basename="vimeo", extension=".html")
 
+
 @pytest.mark.sphinx(testroot="video")
 def test_peertube_html(app, status, warning, file_regression):
     """Test a peertube video in html build."""
@@ -59,7 +60,8 @@ def test_latex(app, status, warning):
         r"\sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{}" in result
     )
     assert (
-        r"\sphinxcontribpeertube{https://peertube.tv/w/}{7ewepW25CTgkktwFpjFuPK}{}" in result
+        r"\sphinxcontribpeertube{https://peertube.tv/w/}{7ewepW25CTgkktwFpjFuPK}{}"
+        in result
     )
 
 
@@ -86,6 +88,7 @@ def test_vimeo_epub(app, status, warning, file_regression):
     xhtml = BeautifulSoup(xhtml, "html.parser")
     video = xhtml.select(".video_link_url")[0].prettify(formatter=fmt)
     file_regression.check(video, basename="vimeo", extension=".xhtml")
+
 
 @pytest.mark.sphinx("epub", testroot="video")
 def test_peertube_epub(app, status, warning, file_regression):

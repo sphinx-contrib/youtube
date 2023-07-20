@@ -1,9 +1,11 @@
 """Directive dedicated to the peertube platform."""
 
-from . import utils
 from docutils.parsers.rst import directives
 
+from . import utils
+
 # https://docs.joinpeertube.org/api/embed-player
+
 
 class peertube(utils.video):
     """Empty video node class."""
@@ -27,6 +29,7 @@ class PeerTube(utils.Video):
         "url_parameters": directives.unchanged,
         "server": directives.unchanged,
     }
+
 
 def visit_peertube_node(self, node):
     """Custom html visit node."""
