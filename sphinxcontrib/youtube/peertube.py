@@ -43,7 +43,13 @@ def visit_video_node_epub(self, node):
     node["platform_url"] = f"https://{node['instance']}/w/"
     return utils.visit_video_node_epub(node)
 
+def visit_video_node_latex(self, node):
+    """Custom epub visit node."""
+    node["platform_url"] = f"https://{node['instance']}/w/"
+    return utils.visit_video_node_latex(node)
+
 
 _NODE_VISITORS = utils._NODE_VISITORS.copy()
 _NODE_VISITORS.update(html=(visit_peertube_node_html, utils.depart_video_node))
 _NODE_VISITORS.update(epub=(visit_video_node_epub, utils.depart_video_node))
+_NODE_VISITORS.update(latex=(visit_video_node_latex, utils.depart_video_node))
