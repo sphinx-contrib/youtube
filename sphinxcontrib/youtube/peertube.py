@@ -33,7 +33,7 @@ class PeerTube(utils.Video):
 
 
 def get_instance(self):
-    """Get peertube instance."""
+    """get peertube instance."""
     instance = self._platform_url
     if "instance" in self.options:
         instance = self.options.get("instance")

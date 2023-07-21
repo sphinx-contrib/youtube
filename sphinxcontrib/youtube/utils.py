@@ -110,6 +110,7 @@ class Video(Directive):
                 platform=self._platform,
                 platform_url=self._platform_url,
                 platform_url_privacy=self._platform_url_privacy,
+                instance=instance,
             )
         ]
 
