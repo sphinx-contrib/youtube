@@ -44,4 +44,4 @@ def visit_video_node_epub(self, node):
 
 _NODE_VISITORS = utils._NODE_VISITORS.copy()
 _NODE_VISITORS.update(html=(visit_peertube_node_html, utils.depart_video_node))
-#_NODE_VISITORS.update(epub=(visit_video_node_epub, utils.depart_video_node))
+_NODE_VISITORS.update(epub=(visit_video_node_epub, utils.depart_video_node))
