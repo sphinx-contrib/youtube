@@ -36,10 +36,10 @@ To link to a different instance than the default :code:`peertube.tv` of the peer
 
 .. code-block:: rst
 
-   .. peertube:: 327a21b3-374e-4373-8b2c-494c9f5e1f19
+   .. peertube:: 9732a818-9fed-4bb2-8469-9502a695cb4d
       :instance: tube.kockatoo.org
 
-.. peertube:: 46d6ac9c-5298-4124-b003-0053d3e253ef
+.. peertube:: 9732a818-9fed-4bb2-8469-9502a695cb4d
    :align: center
    :aspect: 16:9
    :instance: tube.kockatoo.org
