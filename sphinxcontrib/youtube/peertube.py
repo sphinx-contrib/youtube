@@ -28,5 +28,5 @@ class PeerTube(utils.Video):
         "aspect": directives.unchanged,
         "align": directives.unchanged,
         "url_parameters": directives.unchanged,
-        "server_url": directives.unchanged,
+        "instance": directives.unchanged,
     }
