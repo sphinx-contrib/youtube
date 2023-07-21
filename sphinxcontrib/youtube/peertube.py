@@ -32,30 +32,21 @@ class PeerTube(utils.Video):
     }
 
 
-def get_instance(self):
-    """get peertube instance."""
-    instance = self._platform_url
-    if "instance" in self.options:
-        instance = self.options.get("instance")
-    return instance
-
-
 def visit_peertube_node_html(self, node):
     """Custom html visit node."""
-    # custom platform url for peertube
-    node["platform_url"] = f"https://{get_instance(self)}/videos/embed/"
+    node["platform_url"] = f"https://{node['instance']}/videos/embed/"
     return utils.visit_video_node_html(self, node)
 
 
 def visit_video_node_epub(self, node):
     """Custom epub visit node."""
-    node["platform_url"] = f"https://{get_instance(self)}/w/"
+    node["platform_url"] = f"https://{node['instance']}/w/"
     return utils.visit_video_node_epub(self, node)
 
 
 def visit_video_node_latex(self, node):
     """Custom epub visit node."""
-    node["platform_url"] = f"https://{get_instance(self)}/w/"
+    node["platform_url"] = f"https://{node['instance']}/w/"
     return utils.visit_video_node_latex(self, node)
 
 

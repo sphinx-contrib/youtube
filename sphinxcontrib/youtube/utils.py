@@ -98,6 +98,11 @@ class Video(Directive):
         else:
             align = None
 
+        # custom platform url for peertube
+        instance = self._platform_url
+        if "instance" in self.options:
+            instance = self.options.get("instance")
+
         return [
             self._node(
                 id=self.arguments[0],
