@@ -37,7 +37,7 @@ Custom Server for peertube instances:
 
    .. peertube:: 327a21b3-374e-4373-8b2c-494c9f5e1f19
 
-      :server: peertube.tv
+      :instance: peertube.tv
 
 For full usage information, please see the `web documentation
 <https://sphinxcontrib-youtube.readthedocs.io>`__.
