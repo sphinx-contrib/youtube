@@ -99,8 +99,9 @@ class Video(Directive):
             align = None
 
         # custom platform url for peertube
+        instance = None
         if "instance" in self.options:
-            self._platform_url = f"https://{self.options.get('instance')}/videos/embed/"
+            instance = self.options.get('instance')
 
         return [
             self._node(
@@ -114,6 +115,7 @@ class Video(Directive):
                 platform=self._platform,
                 platform_url=self._platform_url,
                 platform_url_privacy=self._platform_url_privacy,
+                instance=instance,
             )
         ]
 

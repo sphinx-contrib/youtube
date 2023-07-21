@@ -19,7 +19,7 @@ class PeerTube(utils.Video):
     _node = peertube
     _thumbnail_url = "{}.jpg"
     _platform = "PeerTube"
-    _platform_url = "https://peertube.tv/w/"
+    _platform_url = ""
 
     # optional options available
     option_spec = {
@@ -32,15 +32,16 @@ class PeerTube(utils.Video):
     }
 
 
-def visit_peertube_node(self, node):
+def visit_peertube_node_html(self, node):
     """Custom html visit node."""
-    if "server" in node:
-        server = node["server"]
-    else:
-        server = "peertube.tv"  # default
-    node["platform_url"] = f"https://{server}/videos/embed/"
+    node["platform_url"] = f"https://{node['instance']}/videos/embed/"
     return utils.visit_video_node_html(self, node)
+
+def visit_video_node_epub(self, node):
+    node["platform_url"] = f"https://{node['instance']}/w/"
+    return utils.visit_video_node_epub(node)
 
 
 _NODE_VISITORS = utils._NODE_VISITORS.copy()
-_NODE_VISITORS.update(html=(visit_peertube_node, utils.depart_video_node))
+_NODE_VISITORS.update(html=(visit_peertube_node_html, utils.depart_video_node))
+_NODE_VISITORS.update(epub=(visit_video_node_epub, utils.depart_video_node))
