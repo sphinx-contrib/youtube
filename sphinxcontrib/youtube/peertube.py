@@ -37,6 +37,7 @@ def visit_peertube_node_html(self, node):
     node["platform_url"] = f"https://{node['instance']}/videos/embed/"
     return utils.visit_video_node_html(self, node)
 
+
 def visit_video_node_epub(self, node):
     node["platform_url"] = f"https://{node['instance']}/w/"
     return utils.visit_video_node_epub(node)

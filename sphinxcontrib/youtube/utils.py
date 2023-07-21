@@ -101,7 +101,7 @@ class Video(Directive):
         # custom platform url for peertube
         instance = None
         if "instance" in self.options:
-            instance = self.options.get('instance')
+            instance = self.options.get("instance")
 
         return [
             self._node(
