@@ -98,6 +98,10 @@ class Video(Directive):
         else:
             align = None
 
+        # custom platform url for peertube
+        if "server_url" in self.options:
+            self._platform_url = f"https://{self.options.get('server_url')}/videos/embed/"
+
         return [
             self._node(
                 id=self.arguments[0],
