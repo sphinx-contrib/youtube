@@ -32,7 +32,7 @@ This module defines directives, :code:`youtube`, :code:`vimeo` :code:`peertube` 
    :align: center
    :aspect: 16:9
 
-To link to a different instance of the peertube platform, use the :code:`instance` keyword:
+To link to a different instance than the default :code:`peertube.tv` of the peertube platform, use the :code:`instance` keyword:
 
 .. code-block:: rst
 
