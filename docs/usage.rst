@@ -145,6 +145,10 @@ In LaTeX output, the following code will be emitted for the videos:
 
    \sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{"#t=0m43s"}
 
+.. code-block:: latex
+   
+   \sphinxcontribPeerTube{https://peertube.tv/w/}{327a21b3-374e-4373-8b2c-494c9f5e1f19}{?start=43}
+
 The user may customise the rendering of the URL by defining this command in the preamble. The captions will be downloaded to the latex folder and can thus be used as images in the :code:`.pdf` document. We are using the `Vumbnail <https://vumbnail.com>`__ (vimeo) and `get-youtube-thumbnail <https://www.get-youtube-thumbnail.com>`__ (youtube) web services to retrieve them. Here is an example of custom command for both the vimeo and the yoututbe output. This needs to be added in the :code:`conf.py` file:
 
 .. code-block:: python
