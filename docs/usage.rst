@@ -127,8 +127,8 @@ To start the video at a specific time the parameter "url_parameters" may be used
 
 .. code-block:: rst
 
-   .. peertube:: 486557682
-      :instance: "peertube.tv"
+   .. peertube:: 327a21b3-374e-4373-8b2c-494c9f5e1f19
+      :url_parameters: "?start=0s"
 
 When generating the EPUB output, the videos will not be embedded. Instead, a link to the video will be added.
 
