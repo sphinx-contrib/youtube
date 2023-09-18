@@ -53,14 +53,14 @@ def test_latex(app, status, warning):
 
     assert r"\newcommand{\sphinxcontribyoutube}" in result
     assert r"\newcommand{\sphinxcontribvimeo}" in result
-    assert r"\newcommand{\sphinxcontribPeerTube}" in result
+    assert r"\newcommand{\sphinxcontribpeertube}" in result
 
     assert r"\sphinxcontribyoutube{https://youtu.be/}{dQw4w9WgXcQ}{}" in result
     assert (
         r"\sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{}" in result
     )
     assert (
-        r"\sphinxcontribPeerTube{https://peertube.tv/w/}{327a21b3-374e-4373-8b2c-494c9f5e1f19}{}"
+        r"\sphinxcontribpeertube{https://peertube.tv/w/}{327a21b3-374e-4373-8b2c-494c9f5e1f19}{}"
         in result
     )
 
