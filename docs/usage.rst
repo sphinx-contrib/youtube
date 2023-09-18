@@ -4,9 +4,9 @@ Getting started
 Demo
 ----
 
-This module provides support for including YouTube and Vimeo videos in Sphinx :code:`rst` documents.
+This module provides support for including YouTube, Vimeo and PeerTube videos in Sphinx :code:`rst` documents.
 
-This module defines directives, :code:`youtube` and :code:`vimeo` which insert videos from the respective platforms. They take a single, required argument, wich is the video ID:
+This module defines directives, :code:`youtube`, :code:`vimeo` :code:`peertube` which insert videos from the respective platforms. They take a single, required argument, wich is the video ID:
 
 .. code-block:: rst
 
@@ -23,6 +23,26 @@ This module defines directives, :code:`youtube` and :code:`vimeo` which insert v
 .. vimeo:: 486557682
    :align: center
    :aspect: 16:9
+
+.. code-block:: rst
+
+   .. peertube:: 327a21b3-374e-4373-8b2c-494c9f5e1f19
+
+.. peertube:: 327a21b3-374e-4373-8b2c-494c9f5e1f19
+   :align: center
+   :aspect: 16:9
+
+To link to a different instance than the default :code:`peertube.tv` of the peertube platform, use the :code:`instance` keyword:
+
+.. code-block:: rst
+
+   .. peertube:: 9732a818-9fed-4bb2-8469-9502a695cb4d
+      :instance: tube.kockatoo.org
+
+.. peertube:: 9732a818-9fed-4bb2-8469-9502a695cb4d
+   :align: center
+   :aspect: 16:9
+   :instance: tube.kockatoo.org
 
 Usage
 -----
@@ -105,6 +125,11 @@ To start the video at a specific time the parameter "url_parameters" may be used
    .. vimeo:: 486557682
       :url_parameters: "#t=0m43s"
 
+.. code-block:: rst
+
+   .. peertube:: 327a21b3-374e-4373-8b2c-494c9f5e1f19
+      :url_parameters: "?start=0s"
+
 When generating the EPUB output, the videos will not be embedded. Instead, a link to the video will be added.
 
 LaTeX
@@ -119,6 +144,10 @@ In LaTeX output, the following code will be emitted for the videos:
 .. code-block:: latex
 
    \sphinxcontribvimeo{https://player.vimeo.com/video/}{148751763}{"#t=0m43s"}
+
+.. code-block:: latex
+   
+   \sphinxcontribpeertube{https://peertube.tv/w/}{327a21b3-374e-4373-8b2c-494c9f5e1f19}{?start=43}
 
 The user may customise the rendering of the URL by defining this command in the preamble. The captions will be downloaded to the latex folder and can thus be used as images in the :code:`.pdf` document. We are using the `Vumbnail <https://vumbnail.com>`__ (vimeo) and `get-youtube-thumbnail <https://www.get-youtube-thumbnail.com>`__ (youtube) web services to retrieve them. Here is an example of custom command for both the vimeo and the yoututbe output. This needs to be added in the :code:`conf.py` file:
 
