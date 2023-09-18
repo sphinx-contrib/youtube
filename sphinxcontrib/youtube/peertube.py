@@ -18,7 +18,7 @@ class PeerTube(utils.Video):
 
     _node = peertube
     _thumbnail_url = "{}.jpg"
-    _platform = "PeerTube"
+    _platform = "peertube"
     _platform_url = "peertube.tv"
 
     # optional options available
