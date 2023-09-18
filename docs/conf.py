@@ -36,7 +36,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/12rambau/youtube",
+            "url": "https://github.com/sphinx-contrib/youtube",
             "icon": "fa-brands fa-github",
         },
         {
