@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Documentation",
     "Topic :: Utilities",
 ]
-dependencies = ["Sphinx>=0.6", "requests"]
+dependencies = ["Sphinx>=6.1", "requests"]
 
 [project.readme]
 content-type = "text/plain"
