@@ -15,7 +15,7 @@ Overview
 This module provides support for including YouTube, Vimeo and Peertube videos in Sphinx
 :code:`rst` documents.
 
-This module defines directives, :code:`youtube`, :code:`vimeo` and :code: `peertube` which insert
+This module defines directives, :code:`youtube`, :code:`vimeo` and :code:`peertube` which insert
 videos from the respective platforms. They take a single, required argument,
 which is the video ID:
 
