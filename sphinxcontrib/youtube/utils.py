@@ -8,7 +8,6 @@ import requests
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
 from sphinx.util import logging
-from sphinx.util.console import brown
 from sphinx.util.display import status_iterator
 
 logger = logging.getLogger(__name__)
@@ -262,7 +261,7 @@ def download_images(app, env):
     )
     msg = "Downloading remote images..."
     nb_images = len(env.video_remote_images)
-    for src in iterator(env.video_remote_images, msg, brown, nb_images):
+    for src in iterator(env.video_remote_images, msg, "brown", nb_images):
 
         dst = Path(app.outdir) / env.video_remote_images[src]
         if not dst.is_file():
