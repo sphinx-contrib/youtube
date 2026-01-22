@@ -157,7 +157,7 @@ def visit_video_node_html(self, node, platform_url_privacy=None, additional_attr
         attrs = {
             "src": "{}{}{}".format(platform_url, node["id"], url_parameters),
             "style": css(style),
-            **additional_attr
+            **additional_attr,
         }
     else:
         if width is None:
@@ -175,7 +175,7 @@ def visit_video_node_html(self, node, platform_url_privacy=None, additional_attr
         attrs = {
             "src": "{}{}{}".format(platform_url, node["id"], url_parameters),
             "style": css(style),
-            **additional_attr
+            **additional_attr,
         }
     if node["align"] is not None:
         div_style["text-align"] = node["align"]
