@@ -1,4 +1,5 @@
 """Sphinx "youtube" extension."""
+
 from . import peertube, utils, vimeo, youtube
 
 __version__ = "1.4.1"
