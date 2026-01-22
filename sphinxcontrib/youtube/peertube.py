@@ -1,5 +1,7 @@
 """Directive dedicated to the peertube platform."""
 
+from typing import ClassVar
+
 from docutils.parsers.rst import directives
 
 from . import utils
@@ -22,7 +24,7 @@ class PeerTube(utils.Video):
     _platform_url = "peertube.tv"
 
     # optional options available
-    option_spec = {
+    option_spec: ClassVar = {
         "width": directives.unchanged,
         "height": directives.unchanged,
         "aspect": directives.unchanged,

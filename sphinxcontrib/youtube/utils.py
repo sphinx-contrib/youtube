@@ -2,6 +2,7 @@
 
 import re
 from pathlib import Path
+from typing import ClassVar
 
 import requests
 from docutils import nodes
@@ -65,7 +66,7 @@ class Video(Directive):
     required_arguments = 1
     optional_arguments = 0
     final_argument_whitespace = False
-    option_spec = {
+    option_spec: ClassVar = {
         "width": directives.unchanged,
         "height": directives.unchanged,
         "aspect": directives.unchanged,
