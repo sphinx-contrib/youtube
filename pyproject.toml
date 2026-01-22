@@ -41,15 +41,14 @@ doc = ["sphinx-copybutton", "pydata-sphinx-theme", "sphinx-design"]
 test = ["pytest", "beautifulsoup4", "pytest-regressions", "pytest-cov"]
 
 [tool.ruff]
-ignore-init-module-imports = true
 fix = true
-select = ["E", "F", "W", "I", "D", "RUF"]
-ignore = ["E501"]  # line too long | Black take care of it
+lint.select = ["E", "F", "W", "I", "D", "RUF"]
+lint.ignore = ["E501"]  # line too long | Black take care of it
 
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.coverage.run]
