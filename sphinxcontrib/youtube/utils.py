@@ -124,7 +124,7 @@ class Video(Directive):
 # -- builder specific methods --------------------------------------------------
 
 
-def visit_video_node_html(self, node, platform_url_privacy=None):
+def visit_video_node_html(self, node, platform_url_privacy=None, additional_attr={}):
     """Visit html video node."""
     aspect = node["aspect"]
     width = node["width"]
@@ -157,6 +157,7 @@ def visit_video_node_html(self, node, platform_url_privacy=None):
         attrs = {
             "src": "{}{}{}".format(platform_url, node["id"], url_parameters),
             "style": css(style),
+            **additional_attr
         }
     else:
         if width is None:
@@ -174,6 +175,7 @@ def visit_video_node_html(self, node, platform_url_privacy=None):
         attrs = {
             "src": "{}{}{}".format(platform_url, node["id"], url_parameters),
             "style": css(style),
+            **additional_attr
         }
     if node["align"] is not None:
         div_style["text-align"] = node["align"]

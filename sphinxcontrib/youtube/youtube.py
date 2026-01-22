@@ -23,7 +23,7 @@ def visit_youtube_node(self, node):
     privacy = "https://www.youtube-nocookie.com/embed/"
     embed = "https://www.youtube.com/embed/"
     node["platform_url"] = embed if node["privacy_mode"] is None else privacy
-    return utils.visit_video_node_html(self, node)
+    return utils.visit_video_node_html(self, node, additional_attr={"referrerpolicy": "strict-origin-when-cross-origin"})
 
 
 _NODE_VISITORS = utils._NODE_VISITORS.copy()
