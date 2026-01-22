@@ -1,7 +1,8 @@
 """Pytest configuration."""
 
+from pathlib import Path
+
 import pytest
-from sphinx.testing.path import path
 
 pytest_plugins = "sphinx.testing.fixtures"
 
@@ -9,4 +10,4 @@ pytest_plugins = "sphinx.testing.fixtures"
 @pytest.fixture(scope="session")
 def rootdir():
     """Get the root directory for the whole test session."""
-    return path(__file__).parent.abspath() / "roots"
+    return Path(__file__).parent.absolute() / "roots"

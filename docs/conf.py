@@ -5,7 +5,6 @@ list see the documentation:
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
 
-
 # -- Path setup ----------------------------------------------------------------
 
 from datetime import datetime
