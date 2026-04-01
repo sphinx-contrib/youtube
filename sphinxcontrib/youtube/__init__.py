@@ -2,7 +2,7 @@
 
 from . import peertube, utils, vimeo, youtube
 
-__version__ = "1.4.1"
+__version__ = "1.5.0"
 
 
 def setup(app):
