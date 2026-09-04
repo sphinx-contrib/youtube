@@ -3,7 +3,34 @@
 import pytest
 from bs4 import BeautifulSoup, formatter
 
+from sphinxcontrib.youtube.youtube import YouTube
+
 fmt = formatter.HTMLFormatter(indent=2, void_element_close_prefix=" /")
+
+
+# -- Video id extraction tests --------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "dQw4w9WgXcQ",
+        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=43s",
+        "http://youtube.com/watch?v=dQw4w9WgXcQ",
+        "www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "https://youtu.be/dQw4w9WgXcQ",
+        "https://youtu.be/dQw4w9WgXcQ?t=43",
+        "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+        "https://www.youtube.com/shorts/dQw4w9WgXcQ",
+        "https://www.youtube.com/live/dQw4w9WgXcQ",
+        "https://m.youtube.com/watch?v=dQw4w9WgXcQ",
+    ],
+)
+def test_youtube_extract_id(value):
+    """Test that a bare id or any common youtube url resolves to the video id."""
+    assert YouTube._extract_id(value) == "dQw4w9WgXcQ"
 
 
 # -- HTML related tests --------------------------------------------------------

@@ -74,10 +74,18 @@ class Video(Directive):
         "privacy_mode": directives.unchanged,
     }
 
+    @classmethod
+    def _extract_id(cls, value):
+        """Return the video id contained in the directive argument.
+
+        Subclasses may override this to also accept a full video url.
+        """
+        return value
+
     def run(self):
         """Run the directive."""
         env = self.state.document.settings.env
-        video_id = self.arguments[0]
+        video_id = self._extract_id(self.arguments[0])
         url = self._thumbnail_url.format(video_id)
         env.video_remote_images[url] = Path(THUMBNAIL_DIR, f"{video_id}.jpg")
         env.images.add_file("", env.video_remote_images[url])
@@ -106,7 +114,7 @@ class Video(Directive):
 
         return [
             self._node(
-                id=self.arguments[0],
+                id=video_id,
                 aspect=aspect,
                 width=get_size(self.options, "width"),
                 height=get_size(self.options, "height"),

@@ -12,6 +12,13 @@ This module defines directives, :code:`youtube`, :code:`vimeo` :code:`peertube` 
 
    ..  youtube:: dQw4w9WgXcQ
 
+The :code:`youtube` directive also accepts a full video url instead of a bare id, and will extract the id automatically. This works for the ``watch?v=``, ``youtu.be/``, ``embed/``, ``shorts/`` and ``live/`` url forms:
+
+.. code-block:: rst
+
+   ..  youtube:: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+   ..  youtube:: https://youtu.be/dQw4w9WgXcQ
+
 ..  youtube:: dQw4w9WgXcQ
    :align: center
    :aspect: 16:9
